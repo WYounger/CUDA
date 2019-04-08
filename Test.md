@@ -4,8 +4,26 @@
 
 1. 添加文件到仓库中
 
-```shel
+```shell
+git add fileName
+```
 
+2. 提交
+
+ ```shell
+git commit -m "message"
+ ```
+
+3. push到仓库中
+
+```shell
+git push origin master
+```
+
+4. 查看修改状态
+
+```shell
+git status
 ```
 
 
