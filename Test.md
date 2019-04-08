@@ -1,6 +1,12 @@
 ### 测试Git
 
-```java
-Class clazz = Class.forName("String");
+基本使用方法
+
+1. 添加文件到仓库中
+
+```shel
+
 ```
+
+
 
