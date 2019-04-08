@@ -26,5 +26,7 @@ git push origin master
 git status
 ```
 
+5. 提交修改
 
+重复 add->commit->push
 
