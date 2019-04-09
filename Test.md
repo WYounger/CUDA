@@ -43,7 +43,7 @@ git commit -am "message"
 #a: all
 ```
 
-8.查看命令帮助
+8. 查看命令帮助
 
 1. 查看所有命令
 
@@ -64,6 +64,4 @@ git command -help #在windows下可用
 ```shell
 reset
 ```
-
-
 
