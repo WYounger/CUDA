@@ -66,7 +66,7 @@
 
 **2.6、Tomcat服务器的执行流程**
 
-![tomcat服务器的执行流程](C:\Users\Young\Desktop\Temp\web资料\javaWeb笔记\images\tomcat服务器的执行流程.png)
+![tomcat服务器的执行流程](images/tomcat服务器的执行流程.png)
 
 第一次执行：
 
