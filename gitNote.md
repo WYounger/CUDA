@@ -8,6 +8,11 @@
 git add fileName
 ```
 
+   ```shell
+git mv oldFileName newFileName
+git commit -m "message"
+   ```
+
 ##### 2.提交
 
  ```shell
