@@ -22,3 +22,16 @@
 
 Configuration-->SqlSessionFactoryBuilder-->SqlSessionFactory
 
+1. 使用XML构建SqlSessionFactoty
+
+   [XML 映射文件](http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html#)
+
+   通过xml文件来构建SqlsessionFactory
+
+   ```java
+   InputStream inputStream = Resources.getResouceAdStream("xmlFile");
+   SqlsessionFactory sqlSessionFactory = 
+                   new SqlSessionFatoryBulilder().builder(inputStream);
+   ```
+
+2. 使用代码创建(略)
