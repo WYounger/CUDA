@@ -42,3 +42,12 @@ PS:在提交该文件时，会自动带上新文件夹
 git commit -am "message"
 #a: all
 ```
+
+8.查看命令帮助
+
+```shell
+git command -help #在windows下可用
+#git help command #在windows不下可用
+#man git -command #在windows不下可用
+```
+
