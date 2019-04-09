@@ -59,3 +59,11 @@ git command -help #在windows下可用
 #man git -command #在windows不下可用
 ```
 
+9. 清屏
+
+```shell
+reset
+```
+
+
+
