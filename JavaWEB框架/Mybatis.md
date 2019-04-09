@@ -146,8 +146,8 @@ public class SqlSessionFactoryUtils {
 
 5. 总结
 
-    	1. 使用map传递参数，可读性较差
-    	2. @Param传递参数个数不宜太多
+     1. 使用map传递参数，可读性较差
+     2. @Param传递参数个数不宜太多
 
 #### 2.ResultMap
 
