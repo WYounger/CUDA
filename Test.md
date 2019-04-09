@@ -45,6 +45,14 @@ git commit -am "message"
 
 8.查看命令帮助
 
+1. 查看所有命令
+
+```shell
+git help
+```
+
+2. 查看具体命令信息
+
 ```shell
 git command -help #在windows下可用
 #git help command #在windows不下可用
