@@ -36,3 +36,9 @@ git status
 
 PS:在提交该文件时，会自动带上新文件夹
 
+7.批量提交修改
+
+```shell
+git commit -am "message"
+#a: all
+```
