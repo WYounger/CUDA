@@ -44,13 +44,13 @@ Configuration-->SqlSessionFactoryBuilder-->SqlSessionFactory
 
    [官方文档](http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html)
 
-   2. 注解实现
+2. 注解实现
 
-      [官方文档](http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html)
+   [官方文档](http://www.mybatis.org/mybatis-3/zh/sqlmap-xml.html)
 
 ##### 4.生命周期
 
-##### [官方文档](http://www.mybatis.org/mybatis-3/zh/getting-started.html)
+[官方文档](http://www.mybatis.org/mybatis-3/zh/getting-started.html)
 
 SqlSessionFactory:相当于数据库连接池，单例，生命周期在整个应用
 
