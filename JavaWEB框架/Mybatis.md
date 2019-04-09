@@ -170,7 +170,7 @@ public class SqlSessionFactoryUtils {
      <association property="propertyn" javaType="Pojo2">
      	 <id property="property_id" column="id"/>
    		 <result property="property2" column="column2"/>
-     		<result property="property3" column="column3"/>
+     	 <result property="property3" column="column3"/>
    		  ...
      </association>
    </resultMap> 
@@ -187,7 +187,7 @@ public class SqlSessionFactoryUtils {
      <collection property="propertyn" ofType="Pojo2">
      	 <id property="property_id" column="id"/>
    		 <result property="property2" column="column2"/>
-     		<result property="property3" column="column3"/>
+     	 <result property="property3" column="column3"/>
    		  ...
      </association>
    </resultMap> 
