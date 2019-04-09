@@ -135,3 +135,5 @@ Servlet 容器装载和实例化一个 Servlet。创建出该 Servlet 类的一�
 　　JSP 本质是一个 Servlet，它的运行也需要容器的支持。
 
 　　在 JSP 和 Servlet 文件中都可以编写 Java 和 HTML 代码，不同的是，Servlet 虽然也可以动态的生成页面内容，但更加偏向于逻辑的控制。JSP 最终被转换成 Servlet 在 jvm 中解释执行，在 JSP 中虽然也可以编写 Java 代码，但它更加偏向于页面视图的展现。在 MVC 架构模式中，就 JSP 和 Servlet 而言，C 通常由 Servlet 充当，V通常由 JSP 来充当。
+
+**JSP是由Servlet演变过来的**
