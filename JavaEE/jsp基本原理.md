@@ -66,7 +66,7 @@
 
 **2.6、Tomcat服务器的执行流程**
 
-![tomcat服务器的执行流程](https://raw.githubusercontent.com/WYounger/Java/master/images/tomcat%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png)
+![tomcat服务器的执行流程](master/images/tomcat服务器的执行流程.png)
 
 第一次执行：
 
