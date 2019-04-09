@@ -62,40 +62,41 @@ Mapper：生命周期<=SqlSession
 
 ```java
 public class SqlSessionFactoryUtils {
-  
-	//实例静态化，保证堆中只有一个实例
-	private static SqlSessionFactory sqlSessionFactory = null;
-	//构造器私有化，防止外界直接new出对象
-	private SqlSessionFactoryUtils() {
-	}
-	
-	public static SqlSessionFactory getSqlSessionFactory() {
-		//懒汉式+同步创建单例
-		if (sqlSessionFactory != null) {
-				return sqlSessionFactory;
-		}
-    //静态方法中开启同步，锁住Class
-    synchronized (SqlSessionFactoryUtils.class) {
-			String resource = "mybatis-config.xml";
-			InputStream inputStream;
-			try {
-				inputStream = Resources.getResourceAsStream(resource);
-				sqlSessionFactory = new       
-                   SqlSessionFactoryBuilder().build(inputStream);
-			} catch (IOException e) {
-				e.printStackTrace();
-				return null;
-			}
-			return sqlSessionFactory;
-		}
-	}
-  //获取SqlSession对象
-  public static SqlSession openSqlSession() {
-		if (sqlSessionFactory == null) {
-			getSqlSessionFactory();
-		}
-		return sqlSessionFactory.openSession();
-	}
+
+    // 实例静态化，保证堆中只有一个实例
+    private static SqlSessionFactory sqlSessionFactory = null;
+
+    // 构造器私有化，防止外界直接new出对象
+    private SqlSessionFactoryUtils() {
+    }
+
+    public static SqlSessionFactory getSqlSessionFactory() {
+        // 懒汉式+同步创建单例
+        if (sqlSessionFactory != null) {
+            return sqlSessionFactory;
+        }
+        // 静态方法中开启同步，锁住Class
+        synchronized (SqlSessionFactoryUtils.class) {
+            String resource = "mybatis-config.xml";
+            InputStream inputStream;
+            try {
+                inputStream = Resources.getResourceAsStream(resource);
+                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+            return sqlSessionFactory;
+        }
+    }
+
+    // 获取SqlSession对象
+    public static SqlSession openSqlSession() {
+        if (sqlSessionFactory == null) {
+            getSqlSessionFactory();
+        }
+        return sqlSessionFactory.openSession();
+    }
 }
 ```
 
