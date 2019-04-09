@@ -9,6 +9,7 @@ git add fileName
 ```
 
    ```shell
+#修改文件名
 git mv oldFileName newFileName
 git commit -m "message"
    ```
