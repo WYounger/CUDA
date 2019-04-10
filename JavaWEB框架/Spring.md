@@ -1,4 +1,4 @@
-### 一、基本IOC
+### 一.基本IOC
 
 #### 1.IOC
 
@@ -16,9 +16,9 @@
 
 [官方文档](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-factory-scopes)
 
-### 二、Spring Bean的装配
+### 二.Spring Bean的装配
 
-### 1.依赖注入的三种方式
+#### 1.依赖注入的三种方式
 
 注入:给spring容器创建的Bean进行**设值**
 
@@ -150,3 +150,38 @@ public class AppConfig{}
 1. 程序系统内部的Bean使用注解形式装配,较为方便
 2. 建立第三库Bean时,建议使用xml方式装配
 3. 通用配置,例如数据库,使用xml方式装配
+
+### 三.测试
+
+```Java
+//第一种方法:引入junit,直接使用ClassPathXmlApplicationContext加载应用上下文
+//getBean()获取Bean对象
+public class MyTest {
+    @Test
+    public void test1(){
+        //首先必须要加载上下文
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("applicationContext.xml");
+        model.Car car = applicationContext.getBean(model.Car.class);
+        System.out.println(car);
+
+        Human human = applicationContext.getBean(Human.class);
+        System.out.println(human);
+    }
+}
+//第二种方法:需要引入junit和sring-test,使用ContextConfiguration加载应用上下文
+//采用自动注入方式获取Bean对象
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:applicationContext.xml")
+public class MyTest {
+    @Autowired
+    Human human;
+   
+    @Test
+    public void test2(){
+        System.out.println(human);
+    }
+}
+
+```
+
