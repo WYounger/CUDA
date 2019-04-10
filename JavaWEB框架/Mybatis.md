@@ -58,7 +58,7 @@ SqlSession:相当于Connection对象，要及时关闭
 
 Mapper：生命周期<=SqlSession
 
-**单例子构建SqlSessionSession**
+**单例构建SqlSessionSession**
 
 ```java
 public class SqlSessionFactoryUtils {
