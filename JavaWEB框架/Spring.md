@@ -28,7 +28,7 @@
 
 ```xml
 <bean id="beanId" class="Bean">
-	<constructor-arg name="name" value="value"/>
+  <constructor-arg name="name" value="value"/>
   ...
 </bean>
 ```
@@ -39,7 +39,7 @@
 
 ```xml
 <bean id="beanId" class="Bean">
-	<property name="name" value="value"/>
+  <property name="name" value="value"/>
   ...
 </bean>
 ```
@@ -58,7 +58,7 @@
 
 ```xml
 <bean id="beanId" class="Bean的全限定类名">
-	<property name="name" value="value"/>
+  <property name="name" value="value"/>
   <property name="name" ref="beanId2"/>
   ...
 </bean>
@@ -143,7 +143,7 @@ public class AppConfig{}
 
 #### 3.Java配置
 
-略
+[官方文档](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#beans-annotation-config)
 
 #### 4.总结
 
