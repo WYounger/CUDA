@@ -136,13 +136,13 @@ public class SqlSessionFactoryUtils {
 
    Mapper接口中方法参数列表:@Param("object1") BeanName1 object1,
 
-   ​							@Param("object2")  BeanName2 object2,
+   ​						 @Param("object2")  BeanName2 object2,
 
    ​							...
 
    xml-Sql中: 不用指定parameterType  #{object1.property1},#{object1.property2}
 
-   ​									  #{object2.property1},#{object2.property2}
+   ​							        #{object2.property1},#{object2.property2}
 
 5. 总结
 
@@ -189,7 +189,7 @@ public class SqlSessionFactoryUtils {
    		 <result property="property2" column="column2"/>
      	 <result property="property3" column="column3"/>
    		  ...
-     </association>
+     </collection>
    </resultMap> 
    ```
 
