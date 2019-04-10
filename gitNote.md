@@ -88,6 +88,6 @@ reset
 3. 在需要引用的该图片的md文档位置使用该路径
 ##### 11.pull
 在线在仓库中直接修改文档，后可以用命令同步到本地
-```
+```shell
 git pull origin master
 ```
