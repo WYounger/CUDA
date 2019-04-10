@@ -171,6 +171,7 @@ public class MyTest {
 }
 //第二种方法:需要引入junit和sring-test,使用ContextConfiguration加载应用上下文
 //采用自动注入方式获取Bean对象
+//注意一点locations要写classpath
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class MyTest {
