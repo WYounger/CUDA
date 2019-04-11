@@ -225,9 +225,8 @@ void triggerAfterCompletion(HttpServletRequest request, HttpServletResponse resp
 
 由以上源码可以得出，拦截器链的执行的过程为
 
-preHandle**1**()--->preHandle**2**()-->...->preHandle**n**()**---->**Handler
+preHandle**1**()-->preHandle**2**()-->...-->preHandle**n**()**-->**Handler
 
-postHandle**1**()<--postHandle**2**()<--..<-postHandle**n**()**<---**
+postHandle**1**()<--postHandle**2**()<--..<--postHandle**n**()**<--**
 
-**--->**afterCompletion**n**()-->...-->afterCompletion**1**()
-
+**-->**afterCompletion**n**()-->...-->afterCompletion**1**()
