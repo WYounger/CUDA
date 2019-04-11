@@ -71,8 +71,41 @@ protected void doDispatch(HttpServletRequest request, HttpServletResponse respon
 
     }
 }
+//找到HandlerExecutionChain
+protected HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+        if (this.handlerMappings != null) {
+          //遍历handlerMappings，找到与request相匹配的handlerExecutionChain
+            Iterator var2 = this.handlerMappings.iterator();
 
+            while(var2.hasNext()) {
+                HandlerMapping mapping = (HandlerMapping)var2.next();
 
+                HandlerExecutionChain handler = mapping.getHandler(request);
+                if (handler != null) {
+                    return handler;
+                }
+            }
+        }
+
+        return null;
+    }
+//找到HandlerAdapter
+protected HandlerAdapter getHandlerAdapter(Object handler) throws ServletException {
+        if (this.handlerAdapters != null) {
+            Iterator var2 = this.handlerAdapters.iterator();
+						//遍历handlerAdapters，找到能处理handler的适配器
+            while(var2.hasNext()) {
+                HandlerAdapter adapter = (HandlerAdapter)var2.next();
+                if (adapter.supports(handler)) {//是否支持
+                    return adapter;
+                }
+            }
+        }
+
+        throw new ServletException("No adapter for handler [" + handler + "]: The DispatcherServlet configuration needs to include a HandlerAdapter that supports this handler");
+    }
+
+//处理结果
 private void processDispatchResult(HttpServletRequest request, HttpServletResponse response, @Nullable HandlerExecutionChain mappedHandler, @Nullable ModelAndView mv, @Nullable Exception exception) throws Exception {
     /**..*/
     if (mv != null && !mv.wasCleared()) {
@@ -87,7 +120,7 @@ private void processDispatchResult(HttpServletRequest request, HttpServletRespon
     /**..*/
 }
 
-
+//渲染视图
 protected void render(ModelAndView mv, HttpServletRequest request, HttpServletResponse response) throws Exception {
     Locale locale = this.localeResolver != null ? this.localeResolver.resolveLocale(request) : request.getLocale();
     response.setLocale(locale);
@@ -129,7 +162,7 @@ protected void render(ModelAndView mv, HttpServletRequest request, HttpServletRe
 
 简单总结一下:
 
-1. 依据请求找到HandlerExecutionChain(Hanldle + Interceptors)
+1. 依据请求通过HanlerMappings找到HandlerExecutionChain(Hanldle + Interceptors)
 2. 通过HandlerExecutionChain中的Handler找到能处理它的适配器
 3. 执行HandlerExecutionChain中的Interceptors的preHandle()
 4. 如果第3步返回true,则适配器执行Handler,返回ModelAndView。否则在会在HandlerExecution.class中applyPreHandle()触发triggerAfterCompletion()
@@ -195,4 +228,6 @@ void triggerAfterCompletion(HttpServletRequest request, HttpServletResponse resp
 preHandle**1**()--->preHandle**2**()-->...->preHandle**n**()**---->**Handler
 
 postHandle**1**()<--postHandle**2**()<--..<-postHandle**n**()**<---**
+
+**--->**afterCompletion**n**()-->...-->afterCompletion**1**()
 
