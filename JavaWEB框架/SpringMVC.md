@@ -219,7 +219,6 @@ void triggerAfterCompletion(HttpServletRequest request, HttpServletResponse resp
                 }
             }
         }
-
     }
 ```
 
