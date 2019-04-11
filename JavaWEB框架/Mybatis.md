@@ -70,25 +70,26 @@ public class SqlSessionFactoryUtils {
     private SqlSessionFactoryUtils() {
     }
 
-    public static SqlSessionFactory getSqlSessionFactory() {
-        // 懒汉式+同步创建单例
-        if (sqlSessionFactory != null) {
-            return sqlSessionFactory;
-        }
-        // 静态方法中开启同步，锁住Class
+public static SqlSessionFactory getSqlSessionFactory() {
+    // 懒汉式+同步创建单例。双重锁
+    if (sqlSessionFactory == null) {
+        //静态方法中开启同步，锁住Class对象
         synchronized (SqlSessionFactoryUtils.class) {
-            String resource = "mybatis-config.xml";
-            InputStream inputStream;
-            try {
-                inputStream = Resources.getResourceAsStream(resource);
-                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
+            if (sqlSessionFactory == null){
+                    String resource = "mybatis-config.xml";
+                    InputStream inputStream=null;
+                try {
+                        inputStream = Resources.getResourceAsStream(resource);
+                        sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
             }
-            return sqlSessionFactory;
         }
     }
+    return sqlSessionFactory;
+}
 
     // 获取SqlSession对象
     public static SqlSession openSqlSession() {
