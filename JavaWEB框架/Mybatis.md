@@ -69,13 +69,12 @@ public class SqlSessionFactoryUtils {
     // 构造器私有化，防止外界直接new出对象
     private SqlSessionFactoryUtils() {
     }
-
-public static SqlSessionFactory getSqlSessionFactory() {
+  	public static SqlSessionFactory getSqlSessionFactory() {
     // 懒汉式+同步创建单例。双重锁
-    if (sqlSessionFactory == null) {
+    	if (sqlSessionFactory == null) {
         //静态方法中开启同步，锁住Class对象
         synchronized (SqlSessionFactoryUtils.class) {
-            if (sqlSessionFactory == null){
+            if (sqlSessionFactory == null){//只会进来一次
                     String resource = "mybatis-config.xml";
                     InputStream inputStream=null;
                 try {
@@ -90,7 +89,6 @@ public static SqlSessionFactory getSqlSessionFactory() {
     }
     return sqlSessionFactory;
 }
-
     // 获取SqlSession对象
     public static SqlSession openSqlSession() {
         if (sqlSessionFactory == null) {
