@@ -142,7 +142,6 @@ public class SqlSessionFactoryUtils {
    xml-Sql中: 不用指定parameterType  #{object1.property1},#{object1.property2}
 
    ​							        #{object2.property1},#{object2.property2}
-
 5. 总结
 
      1. 使用map传递参数，可读性较差
