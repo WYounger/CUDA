@@ -115,7 +115,7 @@ public class SqlSessionFactoryUtils {
 
    xml-Sql中: parameterType="map" #{key1},#{key2}
 
-2. 使用注解@Param
+2. 使用注解**@Param**
 
    Mapper接口中方法参数列表:@Param("name1") JavaType name1,
 
