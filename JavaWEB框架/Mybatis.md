@@ -193,13 +193,19 @@ public class SqlSessionFactoryUtils {
    ```
 
 #### 3.主键回填
+1.第一种方法
 
 ​	**useGeneratedkeys="true" keyProperty="id"**
 
 useGeneratedHeys: 使用JDBC的statement对象中的getGeneratedKeys方法返回主键
 
 keyProperty: 实体中代表主键的属性
-
+2.第二种方法
+<insert>
+<selectKey keyProperty="id">
+	select last_insert_id();
+</selectKey>
+</insert>
 #### 4.动态SQL
 
 [官方文档](http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html)
