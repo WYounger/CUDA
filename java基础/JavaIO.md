@@ -89,7 +89,7 @@ void write(int b);
 图片复制实例
 
 ```java
-				InputStream in = new FileInputStream(new File("i-4.jpg"));
+	InputStream in = new FileInputStream(new File("i-4.jpg"));
         OutputStream out = new  FileOutputStream("i-5.jpg");
         byte[] b = new byte[100];
         int len = 0;
