@@ -115,7 +115,7 @@ public class SqlSessionFactoryUtils {
 
    xml-Sql中: parameterType="map" #{key1},#{key2}
 
-2. 使用注解@Param
+2. 使用注解**@Param**
 
    Mapper接口中方法参数列表:@Param("name1") JavaType name1,
 
@@ -142,7 +142,6 @@ public class SqlSessionFactoryUtils {
    xml-Sql中: 不用指定parameterType  #{object1.property1},#{object1.property2}
 
    ​							        #{object2.property1},#{object2.property2}
-
 5. 总结
 
      1. 使用map传递参数，可读性较差
@@ -193,16 +192,79 @@ public class SqlSessionFactoryUtils {
    ```
 
 #### 3.主键回填
+1.第一种方法
 
 ​	**useGeneratedkeys="true" keyProperty="id"**
 
 useGeneratedHeys: 使用JDBC的statement对象中的getGeneratedKeys方法返回主键
 
 keyProperty: 实体中代表主键的属性
-
+2.第二种方法
+<insert>
+<selectKey keyProperty="id">
+	select last_insert_id();
+</selectKey>
+</insert>
 #### 4.动态SQL
 
 [官方文档](http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html)
+##### .动态Sql
+
+1. **choose when otherwise**
+
+三者的组合相当于**switch case**语句的功能
+
+```xml
+<choose>
+	<when test="condition1">
+        and ...
+    </when>
+    <when test="conditionn">
+        and ...
+    </when>
+    <otherwise>
+    	and ...
+    </otherwise>
+</choose>
+```
+
+2. **where if**
+
+**where子句功能**，自动去除语句开头多余的and、or
+
+```xml
+<where>
+	<if test="contion1">
+     	and ...
+    </if>
+    <if test="conditionn">
+        or ...
+    </if>
+</where>
+```
+
+3. **set**
+
+**set子句功能**,自动去掉多余的"**,**"
+
+```xml
+update student
+<set>
+	<if test="username != null">username=#{username},</if>
+    <if test="password != null">password=#{password},</if>
+    <if test="email != null">email=#{email}</if>
+</set>
+```
+
+4. **foreach**
+
+**遍历集合**,通常用于in子句中
+
+```xml
+<foreach item="item"  collection="list" open="(" separator=,"" close=")" index>
+	#{item}
+</foreach>
+```
 
 ### 四、Mybatis底层原理
 
