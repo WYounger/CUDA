@@ -347,3 +347,72 @@ public class Component{
 }
 ```
 
+### 5.异常处理模式
+
+通常再进行IO操作时，需要进行大量的异常处理，对IO的操作和异常的处理的代码融合在一起，可读性很差。
+
+为了是代码可读性和健壮性，抽取其中IO操作，留下操作接口，再try-catch-finally中直接调用接口的方法来处理IO,让IO操作者实现IO操作接口。
+
+这里要用到**模板设计模式**，将异常处理和IO操作分离
+
+定义IO操作接口
+
+```java
+interface InutStreamProcessor{
+  void process(InputStream inputStream)  throws IOException;
+}
+```
+
+IO处理模板
+
+```java
+public class InputStreamProcessingTemplate {
+
+  //声明静态方法也佳，直接使用类名调用
+    public void process(String fileName, InputStreamProcessor processor){
+        IOException processException = null;
+        InputStream input = null;
+        try{
+            input = new FileInputStream(fileName);
+          	//调用处理器执行IO操作
+            processor.process(input);
+        } catch (IOException e) {
+            processException = e;
+        } finally {
+           if(input != null){
+              try {
+                 input.close();
+              } catch(IOException e){
+                 if(processException != null){
+                    throw new MyException(processException, e,
+                      "Error message..." +
+                      fileName;
+                 } else {
+                    throw new MyException(e,
+                        "Error closing InputStream for file " +
+                        fileName);
+                 }
+              }
+           }
+           if(processException != null){
+              throw new MyException(processException,
+                "Error processing InputStream for file " +
+                    fileName;
+        }
+    }
+}
+```
+
+使用
+
+```java
+new InputStreamProcessingTemplate()
+        .process("someFile.txt", new InputStreamProcessor(){//匿名内部类实现处理器接口
+            public void process(InputStream input) throws IOException{
+                int inChar = input.read();
+                while(inChar !- -1){
+                    //do something with the chars...
+                }
+            }
+        });
+```
