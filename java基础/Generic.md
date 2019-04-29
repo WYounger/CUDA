@@ -66,4 +66,110 @@ GenericFactory<A> factoryA = new GenericFactory<>(A.class);
 
 #### 3.泛型方法
 
-#### 4.通配符
+```java
+public static <T> T addAndReturn(T element, Collection<T> collection){
+        collection.add(element);
+        return element;
+    }
+//测试
+List<String> listStr = new ArrayList<>();
+        String resultStr = addAndReturn("abc",listStr);
+        System.out.println(resultStr);
+
+        List<Integer> listInteger  = new ArrayList<>();
+        int resultInteger = addAndReturn(123,listInteger);
+        System.out.println(resultInteger);
+/*输出
+abc
+123
+*/
+```
+
+总结:
+
+1. 泛型方法可以依据传入参数的类型来感知T的类型
+2. 若两种不同的类型的参数则会产生error
+
+#### 4.泛型类的继承
+
+```java
+public class MyCollection<E> implements Iterable<E>{
+
+    public Iterator<E> iterator() {
+        return new MyIterator<E>();
+    }
+  
+   public boolean hasNext() {  
+        //implement...
+    }
+
+    public T next() {
+        //implement...;
+    }
+
+    public void remove() {
+        //implement... if supported.
+    }
+}
+//测试
+  MyCollection<String> stringCollection = new MyCollection<String>();
+
+    for(String string : stringCollection){
+      
+    }
+```
+
+#### 5.通配符
+
+引入:
+
+```java
+class A{}
+class B extends A{}
+
+List<A> listA = new ArrayList<>();
+List<B> listB = new ArrayList<>();
+listA = listB;//error
+```
+
+##### 无敌通配符<?>
+
+```java
+public void processElements(List<?> elements){
+  for(Object o:elements){//这里只能使用Object类型
+    //do some thing with o
+  }
+}
+
+//传入的参数可以为:List<Type>,Type没有任何限制
+```
+
+##### <? extends ConcreteClass>（只读，不存）
+
+```java
+public void processElements(List<? extends A> elements){
+  for(A a:elements){//这里可以使用A类型
+    //do some thing with o
+  }
+}
+//参数可以为List<Type>,Type为A或者A的子类
+//需要注意的是只能从elements中取出元素，不能存进元素。因为不能确定List中传入的参数的是A的哪个子类
+```
+
+##### <? super ConcreteClass>（只存，不读）
+
+```java
+public static void insertElements(List<? super A> list){
+    list.add(new A());//当你知道?为A的父类，存入的元素的就可以为A或A的子类
+    list.add(new B());
+    list.add(new C());
+}
+
+List<A> listA = new ArrayList<A>();
+insertElements(listA);
+
+List<Object> listObject = new ArrayList<Object>();
+insertElements(listObject);
+
+```
+
