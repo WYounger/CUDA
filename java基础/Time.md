@@ -83,9 +83,36 @@ Calendar.MILLISECOND
 #### 4.SimpleDateFormat
 
 ```java
- SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateStr = format.format(new Date());
-        System.out.println(dateStr);
-        Date date = format.parse("2020-10-01 20:59:00");
+SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//指定格式
+String dateStr = format.format(new Date());//date-->str
+Date date = format.parse("2020-10-01 20:59:00");//str-->date
+```
+
+```java
+y = year (yy or yyyy)
+M = month (MM)
+d = day in month (dd)
+h = hour(0-11) (hh)
+H = hour(0-23) (HH)
+m = minute in hour (mm)
+s = seconds (ss)
+S = milliseconds (SSS)
+```
+
+#### 5.LocalDate LocalTime LocalDateTime
+
+```java
+LocalDate localDate = LocalDate.now();//2019-04-29
+LocalDate localDate1 = LocalDate.of(2020,11,1);
+
+LocalTime localTime = LocalTime.now();//20:04:27.674454
+LocalTime localTime1 = LocalTime.of(21, 30, 59, 11001);
+
+LocalDateTime localDateTime = LocalDateTime.now();//2019-04-29T20:05:00.188327600
+LocalDateTime localDateTime = LocalDateTime.of(2019, 4, 29, 20, 55, 36, 123);
+
+getXXX();
+plusXXXs()
+minusXXXs()
 ```
 
