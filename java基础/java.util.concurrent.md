@@ -54,7 +54,7 @@ class Consumer implements Runnable{
 }
 
 //测试
- 				BlockingQueue blockingQueue = new ArrayBlockingQueue(1024);
+ 	BlockingQueue blockingQueue = new ArrayBlockingQueue(1024);
         new Thread(new Producer(blockingQueue)).start();
         new Thread(new Consumer(blockingQueue)).start();
 ```
@@ -64,7 +64,7 @@ class Consumer implements Runnable{
 ![](http://tutorials.jenkov.com/images/java-concurrency-utils/blocking-deque.png)
 
 ```java
- 				BlockingDeque<String> blockingDeque = new LinkedBlockingDeque<>();
+ 	BlockingDeque<String> blockingDeque = new LinkedBlockingDeque<>();
         blockingDeque.addFirst("123");
         blockingDeque.addLast("456");
         String first = blockingDeque.getFirst();
@@ -76,7 +76,7 @@ class Consumer implements Runnable{
 ##### 3.ConcurrentMap
 
 ```java
-				ConcurrentMap<String,Object> map = new ConcurrentHashMap<>();
+	ConcurrentMap<String,Object> map = new ConcurrentHashMap<>();
         map.put("key","value");
         Object o = map.get("key");
 ```
@@ -130,7 +130,7 @@ class Decrementer implements Runnable {
 
 
 //测试
- 				CountDownLatch latch = new CountDownLatch(3);
+ 	CountDownLatch latch = new CountDownLatch(3);
         Waiter      waiter      = new Waiter(latch);
         Decrementer decrementer = new Decrementer(latch);
         new Thread(waiter)     .start();
