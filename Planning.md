@@ -7,7 +7,7 @@
 1. 深入理解Java虚拟机
 
 2.  Java并发编程的艺术​
-3. **鸟哥私房菜[很急]**
+3. **鸟哥私房菜[很急]**[]
 4. Effective Java 3th version
 5. Head First Design Pattern
 
