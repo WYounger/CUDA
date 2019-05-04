@@ -108,7 +108,103 @@ public B (A a){//容器自动注入A的实例
 
 [查看](https://github.com/WYounger/Java/blob/master/JavaWEB%E6%A1%86%E6%9E%B6/Spring.md)
 
+##### 5.混合配置
 
+1. Java config中引用另一Java config
 
+   **@Import(MyConfig1.class)**
 
+```java
+@Configuration
+public class MyConfig1 {
+    @Bean
+    public Car car(){
+        Car car = new Car();
+        car.setName("bmw");
+        car.setPrice(1234567);
+        return car;
+    }
+}
+
+@Configuration
+@Import(MyConfig1.class)
+public class MyConfig2 {
+    @Bean
+    public Human human(Car car){//注入car
+      	Human human = new Human();
+        human.setCar(car);
+        human.setName("hello");
+        return human;
+    }
+}
+
+```
+
+2. Java config中引用xml
+
+​       使用**@ImportResource("applicationContext.xml")**
+
+```java
+@Configuration
+@ImportResource("applicationContext.xml")
+public class MyConfig {
+    @Bean
+    public Human human(Car car){//注入car,car在idea提示报错，但运行是可以通过的
+        Human human = new Human();
+        human.setCar(car);
+        human.setName("hello");
+        return human;
+    }
+}
+    applicationContext.xml
+    <bean id="car" class="model.Car">
+        <property name="name" value="audi"/>
+        <property name="price" value="100000"/>
+    </bean>
+```
+
+3. xml中引用另一个xml
+
+​    使用<import resource="applicationContext1.xml"/>
+
+```xml
+applicationContext1.xml
+<bean id="car" class="model.Car">
+        <property name="name" value="audi"/>
+        <property name="price" value="100000"/>
+</bean>
+
+applicaionContext2.xml
+ <import resource="applicationContext1.xml"/>
+
+    <bean id="human" class="model.Human">
+        <property name="name" value="wang"/>
+        <property name="car" ref="car"/>
+    </bean>
+```
+
+4. xml中引用java config
+
+   使用<bean class="model.MyConfig1"/>
+
+```java
+@Configuration
+public class MyConfig1 {
+    @Bean
+    public Car car(){
+        Car car = new Car();
+        car.setName("bmw");
+        car.setPrice(1234567);
+        return car;
+    }
+}
+
+	applicationContext.xml
+		<bean class="model.MyConfig1"/>
+
+    <bean id="human" class="model.Human">
+        <property name="name" value="wang"/>
+        <property name="car" ref="car"/>
+    </bean>
+```
 
