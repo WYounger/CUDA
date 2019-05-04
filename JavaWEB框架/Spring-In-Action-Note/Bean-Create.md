@@ -44,7 +44,7 @@ public class MyConfig{}
 
 ```java
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(class="pojo.MyConfig")
+@ContextConfiguration(classes="pojo.MyConfig")
 //@ContextConfiguration(locations={"xml1","xml2"})
 public class Test_{
   @Autowired//由容器自动注入A的对象
