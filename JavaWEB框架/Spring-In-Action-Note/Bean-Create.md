@@ -106,7 +106,7 @@ public B (A a){//容器自动注入A的实例
 
 ##### 4.通过xml配置
 
-[查看](<a href ="https://github.com/WYounger/Java/blob/master/JavaWEB%E6%A1%86%E6%9E%B6/Spring.md" target="_blank">)
+[查看](https://github.com/WYounger/Java/blob/master/JavaWEB%E6%A1%86%E6%9E%B6/Spring.md)
 
 
 
