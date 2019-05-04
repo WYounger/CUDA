@@ -112,7 +112,7 @@ public B (A a){//容器自动注入A的实例
 
 1. Java config中引用另一Java config
 
-   **@Import(MyConfig1.class)**
+   `@Import(MyConfig1.class)`
 
 ```java
 @Configuration
@@ -142,7 +142,7 @@ public class MyConfig2 {
 
 2. Java config中引用xml
 
-​       使用**@ImportResource("applicationContext.xml")**
+​       `@ImportResource("applicationContext.xml")`
 
 ```java
 @Configuration
@@ -165,7 +165,7 @@ public class MyConfig {
 
 3. xml中引用另一个xml
 
-​    使用<import resource="applicationContext1.xml"/>
+​    `<import resource="applicationContext1.xml"/>`
 
 ```xml
 applicationContext1.xml
@@ -185,7 +185,7 @@ applicaionContext2.xml
 
 4. xml中引用java config
 
-   使用<bean class="model.MyConfig1"/>
+   `<bean class="model.MyConfig1"/>`
 
 ```java
 @Configuration
@@ -199,7 +199,7 @@ public class MyConfig1 {
     }
 }
 
-	applicationContext.xml
+	  applicationContext.xml
 		<bean class="model.MyConfig1"/>
 
     <bean id="human" class="model.Human">
