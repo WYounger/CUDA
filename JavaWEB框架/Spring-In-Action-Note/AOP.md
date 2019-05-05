@@ -229,7 +229,6 @@ xml配置
             <aop:around method="aroundAdvice" pointcut-ref="selectAll" arg-names="proceedingJoinPoint"/>
         </aop:aspect>
     </aop:config>
-</beans>
 ```
 
 测试
