@@ -11,15 +11,15 @@ name=Cadillac
 properties2.properties
 price=666666
 
-applicationContext.xml中读取出来
+引入到applicationContext.xml
 <context:property-placeholder location="properties/properties1.properties,
                                             properties/properties2.properties"/>
 
-//xml使用
-    <bean id="car" class="model.Car">
-        <property name="name" value="${name}"/>
-        <property name="price" value="${price}"/>
-    </bean>
+在xml中使用
+<bean id="car" class="model.Car">
+  <property name="name" value="${name}"/>
+  <property name="price" value="${price}"/>
+</bean>
 ```
 
 2. `<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">`
@@ -31,7 +31,7 @@ name=Cadillac
 properties2.properties
 price=666666
 
-xml读取出来
+引入到xml
 <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <array>
@@ -40,11 +40,11 @@ xml读取出来
             </array>
         </property>
     </bean>
-xml使用
-    <bean id="car" class="model.Car">
-        <property name="name" value="${name}"/>
-        <property name="price" value="${price}"/>
-    </bean>
+在xml中使用
+<bean id="car" class="model.Car">
+  <property name="name" value="${name}"/>
+  <property name="price" value="${price}"/>
+</bean>
 ```
 
 在xml使用时，要注意`value="${name}"`中不能有空格，否则空格会连接到value中，导致数据不一致。
@@ -71,16 +71,16 @@ xml都取出来
                 <value>properties/properties2.properties</value>
             </array>
         </property>
-    </bean>
+</bean>
 
 注入到bean中
 注意前缀=PropertiesFactoryBean的id
-    @Value("#{properties.name}")
-    private String name;
+@Value("#{properties.name}")
+private String name;
 
-    @Value("#{properties.price}")
-    private double price;
-   //setter，getter略
+@Value("#{properties.price}")
+private double price;
+//setter，getter略
 
 ```
 
