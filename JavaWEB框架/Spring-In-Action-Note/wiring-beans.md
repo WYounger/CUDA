@@ -53,7 +53,7 @@ public class Test_{
   @Test
   public void testNull(){
     assert(a,null);
-}
+  }
 }
 ```
 
@@ -156,11 +156,11 @@ public class MyConfig {
         return human;
     }
 }
-    applicationContext.xml
-    <bean id="car" class="model.Car">
-        <property name="name" value="audi"/>
-        <property name="price" value="100000"/>
-    </bean>
+applicationContext.xml
+<bean id="car" class="model.Car">
+	<property name="name" value="audi"/>
+  <property name="price" value="100000"/>
+</bean>
 ```
 
 3. xml中引用另一个xml
@@ -170,17 +170,17 @@ public class MyConfig {
 ```xml
 applicationContext1.xml
 <bean id="car" class="model.Car">
-        <property name="name" value="audi"/>
-        <property name="price" value="100000"/>
+  <property name="name" value="audi"/>
+  <property name="price" value="100000"/>
 </bean>
 
 applicaionContext2.xml
- <import resource="applicationContext1.xml"/>
+<import resource="applicationContext1.xml"/>
 
-    <bean id="human" class="model.Human">
-        <property name="name" value="wang"/>
-        <property name="car" ref="car"/>
-    </bean>
+<bean id="human" class="model.Human">
+  <property name="name" value="wang"/>
+  <property name="car" ref="car"/>
+</bean>
 ```
 
 4. xml中引用java config
@@ -199,12 +199,12 @@ public class MyConfig1 {
     }
 }
 
-	  applicationContext.xml
-		<bean class="model.MyConfig1"/>
+applicationContext.xml
+<bean class="model.MyConfig1"/>
 
-    <bean id="human" class="model.Human">
-        <property name="name" value="wang"/>
-        <property name="car" ref="car"/>
-    </bean>
+<bean id="human" class="model.Human">
+	<property name="name" value="wang"/>
+	<property name="car" ref="car"/>
+</bean>
 ```
 
