@@ -122,3 +122,57 @@ public class MyTest {
 
 ##### 2.条件化的bean
 
+##### 3.处理自动装配的歧义性
+
+当注入一个接口时，但是该接口有多个实现类，那么spring容器会注入哪一个呢?答案是抛出异常:NoUniqueBeanDefinitionEXception.
+
+1. `primary`
+
+使用`primary`定义首选该bean
+
+```java
+@Component
+@Primary
+public class BeanImpl1 implements Bean{}
+```
+
+```xml
+<bean id="id" class="BeanImpl1" primary="true"/>
+```
+
+```java
+@Configuration
+public class MyConfig{
+  @Bean
+  @Primary
+  public class Bean bean(){
+    return new BeanImpl1();
+  }
+}
+```
+
+2.`Qualifier`
+
+在接口Bean上明确给定要注入的bean id
+
+```java
+@Autowired
+@Qualifier("beanImpl1")
+Bean bean;
+```
+
+使用`Qualifier`给BeanImpl取别名
+
+```java
+@Component
+@Qualifier("aliasName")
+public class  BeanImpl1 implements Bean{}
+或者直接使用Component来取别名
+@Component("aliasName")
+public class  BeanImpl1 implements Bean{}
+
+@Autowired
+@Qualifier("aliasName")
+Bean bean;
+```
+
