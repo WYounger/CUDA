@@ -1,4 +1,6 @@
-**动态代理实现**，所以动态代理生成的Bean必须采用接口来接收，不能使用目标bean来接收
+### 1.基于AspectJ
+
+动态代理实现**，所以动态代理生成的Bean必须采用接口来接收，不能使用目标bean来接收
 
 **AOP利用AspectJ实现的一般步骤**
 
@@ -121,7 +123,20 @@ Animal cat = (Animal) context.getBean("cat");//获取加强后的bean
 cat.study();
 ```
 
-**使用常规类和xml配置来实现**
+输出
+
+```bash
+beforeAdvice
+aroundAdvice:-----前
+目标方法执行
+aroundAdvice:-----后
+AfterReturning:i have learned spring today!++++
+afterAdvice
+```
+
+### 2.基于XML
+
+**使用常规类和xml配置来实现一般步骤**
 
 1. 定义切面类和目标类
 
@@ -225,5 +240,16 @@ ClassPathXmlApplicationContext context =
 
 Animal cat = (Animal) context.getBean("cat");
 cat.study();
+```
+
+输出
+
+```bash
+beforeAdvice
+aroundAdvice:-----前
+目标方法执行
+aroundAdvice:-----后
+AfterReturning:i have learned spring today!++++
+afterAdvice
 ```
 
