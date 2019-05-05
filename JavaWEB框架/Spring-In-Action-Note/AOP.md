@@ -1,3 +1,23 @@
+### 依赖
+
+```xml
+    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/aspectj/aspectjrt -->
+		<dependency>
+			<groupId>aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.5.3</version>
+		</dependency>
+```
+
+
+
 ### 1.基于AspectJ
 
 动态代理实现**，所以动态代理生成的Bean必须采用接口来接收，不能使用目标bean来接收
