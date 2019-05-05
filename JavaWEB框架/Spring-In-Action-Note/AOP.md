@@ -1,11 +1,12 @@
-AOP利用AspectJ实现的一般步骤
-
 **动态代理实现**，所以动态代理生成的Bean必须采用接口来接收，不能使用目标bean来接收
 
+AOP利用AspectJ实现的一般步骤
+
 1. 定义切面
-2. 注册切面到spring容器
-3. 定义目标类
-4. 注册目标类到spring容器
+2. 注册切面到spring容器 
+3. 开启动态代理
+4. 定义目标类
+5. 注册目标类到spring容器
 
 MyAspect.class
 
