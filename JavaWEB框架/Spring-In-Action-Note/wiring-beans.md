@@ -203,8 +203,8 @@ applicationContext.xml
 <bean class="model.MyConfig1"/>
 
 <bean id="human" class="model.Human">
-	<property name="name" value="wang"/>
-	<property name="car" ref="car"/>
+  <property name="name" value="wang"/>
+  <property name="car" ref="car"/>
 </bean>
 ```
 
