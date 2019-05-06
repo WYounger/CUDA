@@ -128,3 +128,5 @@ objectOutputStream.writeObject(obj);
 ```
 
 用处：实现对象深度拷贝
+
+![框架图](https://www.tutorialspoint.com/java/images/file_io.jpg)
