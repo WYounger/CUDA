@@ -8,7 +8,7 @@ await();//阻塞调用该方法的线程,直至n=0
 countDown();//n--
 ```
 
-由于`countDown()方法可以用在任何地方，所以这里n可以是n个线程或一个线程n个执行步骤。用在多个线程时，只需要将该countDownLatch的引用传递到线程即可
+由于`countDown()`方法可以用在任何地方，所以这里n可以是n个线程或一个线程n个执行步骤。用在多个线程时，只需要将该countDownLatch的引用传递到线程即可
 
 ```java
 public class ThreadPool_ {
@@ -161,7 +161,7 @@ class CheckSheetWater implements Runnable{
 
 ##### 3.Semaphore---控制并发线程数量
 
-Semaphore(信号量)用来控制同时访问特定资源的线程数量，让可用协调各个线程，以保证合理的使用公共资源
+`Semaphore`(信号量)用来控制同时访问特定资源的线程数量，让可用协调各个线程，以保证合理的使用公共资源
 
 ```java
 acquire();//获取许可
@@ -202,11 +202,11 @@ public class Test{
 }
 ```
 
-##### 4.Exechanger---线程间数据交换
+##### 4.Exchanger---线程间数据交换
 
 它提供一个同步点，在这个同步点，两个线程可以交换彼此的的数据。
 
-如果第一个线程先执行exechange()方法，他会一直等待第二个线程也执行exechange()方法，当两个线程都到达同步点时，这俩个就可以交换数据，将本线程生产出来的数据传递给对方
+如果第一个线程先执行exchange()方法，他会一直等待第二个线程也执行`exchange()`方法，当两个线程都到达同步点时，这俩个线程就可以交换数据，将本线程生产出来的数据传递给对方
 
 ```java
 
