@@ -19,6 +19,7 @@ public class Student {
     @Email(message = "邮箱格式不正确")
     private String email;
 
+  	//格式校验
     @Pattern(regexp = "^1[358][1-9]{9}$",message="电话格式不正确")
     private String phone;
 
