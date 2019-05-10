@@ -9,21 +9,24 @@ bean
 ```java
 public class Student {
 
+    @NotNull(message = "不能为空")
     @Length(min = 2,max = 10,message = "长度2-15")
     private String name;
 
     @Min(value = 18,message = "年龄不能小于18")
     @Max(value = 30,message = "年龄不能大于30")
+    //@Range(min = 18,max=30,message = "")等效于@Min和@Max,来自hibernate
     private int age;
-  
+
+    @NotNull(message = "不能为空")
     @Email(message = "邮箱格式不正确")
     private String email;
 
-  	//格式校验
+    @NotNull(message = "不能为空")
     @Pattern(regexp = "^1[358][1-9]{9}$",message="电话格式不正确")
     private String phone;
 
-     @NotEmpty(message = "不能为空")//字符串的长度0不能用NotNull注解验证
+    @NotEmpty(message = "不能为空")
     private String address;
   	//getter和setter略
 }
