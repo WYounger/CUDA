@@ -18,7 +18,8 @@
 
    ```java
    @RequestMapping(value="/{pathVariable1}/{pathVariable2}")//两个占位符，映射到处理方法参数上
-   public String method(@PathVariable("pathVariable1") Type pathVariable1,@PathVariable("pathVariable2") Type pathVariable2){
+   public String method(@PathVariable("pathVariable1") Type pathVariable1,
+                        @PathVariable("pathVariable2") Type pathVariable2){
      
    }
    ```
