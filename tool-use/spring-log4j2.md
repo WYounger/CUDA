@@ -2,7 +2,7 @@
 
 `log4j-core`
 
-`log4k-api`
+`log4j-api`
 
 `slf4j-api`[spring下需要引入]
 
