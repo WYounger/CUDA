@@ -8,7 +8,7 @@ class ExeCueteScript {
                              Map<String, Object> context,//上下文
                              String functionName,//需要调用脚本中函数名
                              Object... params) {//函数参数
-        //获取脚本引擎
+        //获取脚本引擎，这里使用javascript来做脚本语言
         ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("javascript");
         //创建上下文环境
         Bindings bindings = scriptEngine.createBindings();
