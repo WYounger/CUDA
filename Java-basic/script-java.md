@@ -3,7 +3,7 @@
 ```java
 
 
-class ExeCueteScript {
+class ExecueteScript {
     public static Object exe(String filePath,//脚本文件路径
                              Map<String, Object> context,//上下文
                              String functionName,//需要调用脚本中函数名
