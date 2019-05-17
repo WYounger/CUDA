@@ -1,10 +1,13 @@
 对于项目易变代码，可以用脚本来编写，这样就可以不用重启JVM的情况下，照样可以运行修改部分的程序。
 
 ```java
+
+
 class ExeCueteScript {
-    public static Object exe(String path, String functionName,
-                             Map<String, Object> context,
-                             Object... params) {
+    public static Object exe(String filePath,//脚本文件路径
+                             Map<String, Object> context,//基本上下文
+                             String functionName,//需要调用脚本中函数名
+                             Object... params) {//函数参数
         //获取脚本引擎
         ScriptEngine scriptEngine = new ScriptEngineManager().getEngineByName("javascript");
         //创建上下文环境
@@ -16,7 +19,7 @@ class ExeCueteScript {
 
         try {
             //读取js代码
-            scriptEngine.eval(new FileReader(path));
+            scriptEngine.eval(new FileReader(filePath));
             //是否可调用方法
             if (scriptEngine instanceof Invocable) {
                 Invocable invocable = (Invocable) scriptEngine;
