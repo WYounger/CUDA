@@ -226,4 +226,47 @@ private fianl E[] a;//传入的数组赋值它
 //没有提供add insert delete方法
 ```
 
-##### 11.
+##### 11.泛型
+
+1.  泛型的擦除
+
+> Java泛型在编译期有效，在运行时间被删除，即泛型在编译后被擦除掉
+
+List<String> List<Integer>  List<T>  ===> List
+
+List<String>[]   ===> List[]
+
+List<? extends E> List<? superE>  ===> List<E>
+
+List<T extends Serializable && Cloneable> ===> List<Serializable>
+
+2. 不能初始化泛型参数和数组
+
+```java
+T[] tt = new T[num];//不允许
+List<T> list = new ArrayList<T>();//允许
+```
+
+3.上下界
+
+上界可读`<? extends T>`
+
+```java
+public static void read(List<? extends E> list){
+  for(E e:list){
+    //...
+  }
+}
+```
+
+下界可写`<? super T>`
+
+```java
+public static void write(List<? super Number> list){
+  list.add(1);
+  list.add(1.1)
+}
+```
+
+既可读又可写`<?>`
+

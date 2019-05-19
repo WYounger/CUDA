@@ -126,3 +126,59 @@ class A{
 
 ```
 
+
+
+实例
+
+```java
+
+class Reflector {
+
+    public static String getFields(Field[] fields) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Field field : fields) {
+            stringBuilder.append(field.getType()).append(" ").append(field.getName()).append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String getConstructors(Constructor[] constructors) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Constructor constructor : constructors) {
+            stringBuilder.append(constructor.getName()).append("(");
+            getParameters(constructor.getParameterTypes(), stringBuilder);
+            stringBuilder.append(")").append("\n");
+        }
+        return stringBuilder.toString();
+    }
+
+    public static String getMethods(Method[] methods) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Method method : methods) {
+            getSignature(method, stringBuilder);
+        }
+        return stringBuilder.toString();
+    }
+
+    private static void getSignature(Method method, StringBuilder stringBuilder) {
+        if (!method.isAccessible()) {
+            method.setAccessible(true);
+        }
+        //todo 获取方法签名
+        stringBuilder.append(method.getModifiers()).append(" ").append(method.getReturnType()).append(" ");
+        stringBuilder.append(method.getName());
+        stringBuilder.append("(");
+        getParameters(method.getParameterTypes(), stringBuilder);
+    }
+
+    private static void getParameters(Class[] parameterTypes, StringBuilder stringBuilder) {
+        for (int i = 0; i < parameterTypes.length; i++) {
+            Class parameterType = parameterTypes[i];
+            stringBuilder.append(parameterType.getTypeName());
+            if (i != parameterTypes.length - 1)
+                stringBuilder.append(",");
+        }
+    }
+}
+```
+
