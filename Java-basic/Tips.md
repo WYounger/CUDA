@@ -12,14 +12,15 @@ num % 2 == 0 ? "偶数" : "奇数";
 
 所以要检查`0`,`负最小`,`正最大`
 
-##### 3.包装类型要检查`null`
+##### 3.包装类型
 
 Integer源码分析
 
 ```java
     //装箱过程,推荐这个这种方式创建Integer对象
     public static Integer valueOf(int i) {
-        if (i >= IntegerCache.low && i <= IntegerCache.high)
+        
+        if (i >= IntegerCache.low && i <= IntegerCache.high)//启用缓存
             return IntegerCache.cache[i + (-IntegerCache.low)];
         return new Integer(i);
     }
@@ -40,19 +41,72 @@ Integer源码分析
     public int intValue() {
         return value;
     }
+
+    private static class IntegerCache {
+        static final int low = -128;//缓存下届
+        static final int high;//缓存上届
+        static final Integer cache[];//缓存数组
+
+        static {
+            // high value may be configured by property
+            int h = 127;
+            String integerCacheHighPropValue =
+                VM.getSavedProperty("java.lang.Integer.IntegerCache.high");
+            if (integerCacheHighPropValue != null) {
+                try {
+                    int i = parseInt(integerCacheHighPropValue);
+                    i = Math.max(i, 127);
+                    // Maximum array size is Integer.MAX_VALUE
+                    h = Math.min(i, Integer.MAX_VALUE - (-low) -1);
+                } catch( NumberFormatException nfe) {
+                    // If the property cannot be parsed into an int, ignore it.
+                }
+            }
+            high = h;
+
+            cache = new Integer[(high - low) + 1];//分配内存
+            int j = low;
+            for(int k = 0; k < cache.length; k++)
+                cache[k] = new Integer(j++);//缓存Integer
+
+          	//缓存区间[-128,127]
+            // range [-128, 127] must be interned (JLS7 5.1.7)
+            assert IntegerCache.high >= 127;
+        }
+
+        private IntegerCache() {}
+    }
 ```
+
+1.  拆箱装箱原理
 
 ```java
 Integer i = 10;
 //等价于
-Integer i = Integer.valueOf(10);//装箱
+Integer i = Integer.valueOf(10);//装箱得到Integer类型值
 
 int ii = i ;
 //等价于
-int ii = i.intValue();//拆箱
+int ii = i.intValue();//拆箱得到int类型的值
 ```
 
-由上可知，当`i`为`null`时，拆箱失败，抛出`NullPointerException`
+  由上可知，当`i`为`null`时，拆箱失败，抛出`NullPointerException`所以包装类型拆箱之前要检查是否为`null`
 
-所以包装类型拆箱之前要检查是否为`null`
+2. Integer`缓存机制
+
+默认情况下`Integer`的会在`[-128,127]`之间缓存，刚好是一个`byte`的大小
+
+所以可以得出下结论
+
+```java
+Integer i1 = 10;
+Integer i2 = 10;
+i1 == i2;//true
+
+Integer i3 = 128;
+Integer i4 = 128;
+i3 == i4;//false
+```
+
+
 
