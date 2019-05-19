@@ -92,9 +92,11 @@ int ii = i.intValue();//拆箱得到int类型的值
 
   由上可知，当`i`为`null`时，拆箱失败，抛出`NullPointerException`所以包装类型拆箱之前要检查是否为`null`
 
-2. Integer`缓存机制
+2. `Integer`缓存机制
 
 默认情况下`Integer`的会在`[-128,127]`之间缓存，刚好是一个`byte`的大小
+
+对于==比较是否相等，对于引用类型比较是的引用，对于基本数据类型比较的是值
 
 所以可以得出下结论
 
@@ -107,6 +109,8 @@ Integer i3 = 128;
 Integer i4 = 128;
 i3 == i4;//false
 ```
+
+而对于包装类型的 `>`  `<`会拆箱来比较值的大小
 
 ##### 4.随机数
 
@@ -200,3 +204,26 @@ public boolean equals(Object obj){
 ```
 
 重写`equals()`必须重写`hasCode()`
+
+##### 10.asList
+
+基本数据类型数组转换为`List`
+
+```java
+int[] a = {1,2,3,4};
+List list = Arrays.asList(a);//a[]整体被看作为一个参数
+list.size();//1
+
+Integer[] a = {1,2,3,4};
+List list = Arrays.asList(a);
+list.size();//a.length
+```
+
+转换为`list`之后，`list`是不可变
+
+```java
+private fianl E[] a;//传入的数组赋值它
+//没有提供add insert delete方法
+```
+
+##### 11.
