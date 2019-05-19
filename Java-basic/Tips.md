@@ -108,5 +108,19 @@ Integer i4 = 128;
 i3 == i4;//false
 ```
 
+##### 4.随机数
 
+产生随机数的两种方法:原理相同
 
+```java
+Random random = new Random();//当前时间为seed
+random.nextInt();//包括其他基本数据类型
+
+Math.random();//0.0<num<1.0,前时间为seed
+```
+
+> 种子不同，产生不同的随机数
+>
+> 种子相同，即使实例不同也产生相同的随机数
+
+所以正确的做法是`不要设置seed`
