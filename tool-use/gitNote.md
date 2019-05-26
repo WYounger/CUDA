@@ -91,3 +91,53 @@ reset
 ```shell
 git pull origin master
 ```
+
+##### 12.分支操作
+
+```bash
+git init #初始化一个本地仓库
+git add <file> #可以反复使用，添加多个文件 file1 file2...
+git commit -m <message> #提交到仓库
+git status #查看工作状态
+
+#git add把文件修改添加到暂存区(stage)
+#git commit 把暂存区的所有内容提交到当前分支(默认master)
+
+#git管理的是修改。每次修改，如果不用git add到暂存区，那就不会加入到commit
+
+#仅仅针对修改还没有添加到暂存区【工作区恢复】
+git checkout --<file> #让文件回到最近一次的git commit 或git add时的状态
+
+#仅仅针对修改添加到暂存区【暂存区恢复】
+git reset HEAD <file> #将对暂存区的修改撤销掉，但是工作区修改还未撤销，需要的继续使用git checkout来使工作区复原
+
+#删除文件
+git rm <file>
+git commit -m <"delete the file">
+
+#本地仓库关联远程仓库
+git remote add origin https://github.com//UserName/Repostory.git
+git push -u origin master#第一次推送master分支的所有内容
+#以后每次本地提交后，就可以使用git push origin master推送最新的修改
+
+#将远程仓库克隆到本地
+git clone https/ssh-address
+
+#分支管理
+git branch <name> #创建分支
+git checkout <name> #切换分支
+git checkout -b <name>#创建并切换分支
+git merge <name>#切换某分支到当前分支
+git branch -d <name>#删除当前分支
+```
+
+13.仓库管理
+
+```bash
+git remote add origin git@github.com:userName/repository.git
+git push -u origin master#首次本次仓库关联远程仓库
+
+git remote remove origin #删除联系
+git remote show orgin #查看联系
+```
+
