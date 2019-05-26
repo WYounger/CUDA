@@ -1,5 +1,3 @@
-### 测试Git
-
 #### 基本使用方法
 
 ##### 1.添加文件到仓库中
@@ -131,7 +129,7 @@ git merge <name>#切换某分支到当前分支
 git branch -d <name>#删除当前分支
 ```
 
-13.仓库管理
+##### 13.仓库管理
 
 ```bash
 git remote add origin git@github.com:userName/repository.git
@@ -139,5 +137,16 @@ git push -u origin master#首次本次仓库关联远程仓库
 
 git remote remove origin #删除联系
 git remote show orgin #查看联系
+```
+
+##### 14.修改本地仓库名称
+
+1. 修改本地仓库名称
+2. 修改远程仓库名称
+3. 重新将本地仓库与远程仓库连接起来
+
+```bash
+git remote set-url origin https://github.git/userName/newRepository.git
+git push -u origin master
 ```
 
