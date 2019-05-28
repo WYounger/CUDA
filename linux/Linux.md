@@ -258,3 +258,74 @@ tail [-n number] file #-n number 显示后多少行
 tail [-n +number] file #只列出多少行后数据
 ```
 
+#### 6.文件查找
+
+##### 1.whereis
+
+```bash
+
+```
+
+##### 2.locate
+
+```bash
+
+```
+
+##### 3.find
+
+```bash
+
+```
+
+#### 7.软件维护
+
+```bash
+sudo apt install 软件名 #安装
+suso apt remove 软件名 #卸载
+sudo apt upgrade 软件名 #更新
+```
+
+#### 8.打包和解压缩
+
+##### 1.tar
+
+只负责打包，不负责压缩
+
+```bash
+tar -cvf destination.tar file1 file2 .../director #打包
+tar -xvf source.tar #解包
+#-c 创建tar文件
+#-x 解包
+#-v 列出详细过程
+#-f 指定名称
+```
+
+##### 2.gzip
+
+只能对单个文件进行压缩，若为目录压缩，要先打包
+
+```bash
+tar -zcvf destination.tar.gz file1 file2 .../director #压缩
+tar -zxvf source.tar.gz [-C  destination] #解压缩
+#-z 使用gzip命令压缩
+```
+
+##### 3.bzip2
+
+```bash
+tar -jcvf destination.tar.bz2 file1 file2 .../director #压缩
+tar -jxvf source.tar.bz2 [-C destination] #解压缩
+#-j 使用bzip2解压缩
+```
+
+#### 9.vim
+
+##### 1.状态模式
+
+```bash
+
+```
+
+
+
