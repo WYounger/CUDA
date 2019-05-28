@@ -327,5 +327,36 @@ tar -jxvf source.tar.bz2 [-C destination] #解压缩
 <img alt="" src="https://github.com/WYounger/computer-science/blob/master/images/vim.jpg" style="margin: 0 auto;" />
 </div>
 
+##### 2.一般命令模式
 
+```bash
+#查找
+/word 向下查找一个匹配的词
+?word 向上查找一个匹配的词
+n 重复前一个查找操作
+N 重复(反向)前一个查找操作
+#替换
+:n1,n2s/word1/word2/g #将n1-n2行中word1替换为word2
+:n1,$s/word1/word2/g  #将n1-末行中word1替换为word2
+#删除
+x #相当于[del]
+X #相当于[backspace]
+dd #删除光标所在行
+ndd #删除光标所在的向下n行
+#复制
+yy #复制光标所在行
+nyy #复制光标所在行下n行
+#粘贴
+p  #粘贴到光标下一行
+P  #粘贴到光标上一行
+```
+
+##### 3.命令行模式
+
+```bash
+:w #写到硬盘
+:q #退出vim
+:wq #写到并退出
+:w flieName #另存为fileName
+```
 
