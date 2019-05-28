@@ -79,15 +79,15 @@ man command
 
 1. 修改用户组`chgrp`
 
-       ```bash
-chgrp groupName [-R] dirName/fileName #-R递归修改
-       ```
+   ```bash
+   chgrp groupName [-R] dirName/fileName #-R递归修改
+   ```
 
 2. 修改拥有者`chown`
 
-```bash
-chown owner [-R] firName/fileName #-R递归修改
-```
+   ```bash
+   chown owner [-R] firName/fileName #-R递归修改
+   ```
 
 3. 修改权限
 
@@ -96,17 +96,18 @@ chown owner [-R] firName/fileName #-R递归修改
    r:4 w:2 x:1
 
    ```bash
-chmod 777 [-R] dirName/fileName #-R递归修改
+   chmod 777 [-R] dirName/fileName #-R递归修改
    ```
 
    符号类型修改文件权限
 
-| chmod | u g o a | + -  = | r w x | 文件或目录 |
-| ----- | ------- | ------ | ----- | ---------- |
+   | chmod | u g o a | + -  = | r w x | 文件或目录 |
+   | ----- | ------- | ------ | ----- | ---------- |
+   | chmod | u g o a | + - =  | r w x | file/dir   |
 
-​      u:user g:group o:others a:all
+   ​      u:user g:group o:others a:all
 
-​     +:添加 -:删除 =：设置
+   ​     +:添加 -:删除 =：设置
 
 ```bash
 chmod u=rwx,go=rx fileName #rwxr-xr-x
