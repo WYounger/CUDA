@@ -323,9 +323,7 @@ tar -jxvf source.tar.bz2 [-C destination] #解压缩
 
 ##### 1.状态模式
 
-```bash
-
-```
+![](https://github.com/WYounger/computer-science/blob/master/images/vim.jp)
 
 
 
