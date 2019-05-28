@@ -323,7 +323,9 @@ tar -jxvf source.tar.bz2 [-C destination] #解压缩
 
 ##### 1.状态模式
 
-![](https://github.com/WYounger/computer-science/blob/master/images/vim.jp)
+<div style="text-align: center; width: 500px; border: green solid 1px;">
+<img alt="" src="https://github.com/WYounger/computer-science/blob/master/images/vim.jpg" style="margin: 0 auto;" />
+</div>
 
 
 
