@@ -68,7 +68,7 @@ package model;
 
 public class Student {
     private String name;
-		 private int age;
+		private int age;
    //getter.setter.toString
 }
 ```
