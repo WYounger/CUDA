@@ -88,7 +88,7 @@
 
 **3.jsp工作原理**
 
-![jsp工作原理](C:\Users\Young\Desktop\Temp\web资料\javaWeb笔记\images\jsp工作原理.png)
+![jsp工作原理](<https://github.com/WYounger/computer-science/blob/master/images/servlet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png>)
 
 当客户端浏览器向服务器请求一个 JSP 页面时，服务器收到该请求后，首先检查所请求的这个JSP 文件内容 ( 代码) 是否已经被更新，或者是否是 JSP 文件创建后的第一次被访问，如果是，那么，这个 JSP 文件就会在服务器端的JSP 引擎作用下转化为一个 Servlet 类的 Java 源代码文件。紧接着，这个 Servlet 类会在 Java 编译器的作用下被编译成一个字节码文件，并装载到 jvm 解释执行。剩下的就等同于 Servlet 的处理过程了。如果被请求的 JSP 文件内容 ( 代码 ) 没有被修改，那么它的处理过程也等同于一个 Servlet 的处理过程。即直接由服务器检索出与之对应的Servlet 实例来处理。
 
@@ -120,7 +120,7 @@ Servlet 容器装载和实例化一个 Servlet。创建出该 Servlet 类的一�
 
 **2.Servlet 的工作原理**
 
-![servlet工作原理](C:\Users\Young\Desktop\Temp\web资料\javaWeb笔记\images\servlet工作原理.png)
+![servlet工作原理](<https://github.com/WYounger/computer-science/blob/master/images/servlet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86.png>)
 
 　　当客户端浏览器向服务器请求一个 Servlet 时，服务器收到该请求后，首先到容器中检索与请求匹配的 Servlet实例是否已经存在。
 
