@@ -61,13 +61,15 @@ spring-web.xml
     <mvc:annotation-driven/>
 ```
 
+##### model
+
 ```java
 package model;
 
 public class Student {
     private String name;
 		 private int age;
-   //getter.setter.toStroing
+   //getter.setter.toString
 }
 ```
 
@@ -96,10 +98,10 @@ public class JsonController {
     public Object doJson(Student student){
 
         Student student1 =new Student("hyx",9);
-        //可以返回单个对象
+        //返回单个对象
         //return student;
 
-        //可以返回list
+        //返回list
 //        List<Student> list = new ArrayList<>();
 //        list.add(student);
 //        list.add(student1);
