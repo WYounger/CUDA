@@ -81,7 +81,7 @@ daemonize yes
 pidfile /var/run/redis-sentinel-26381.pid
 logfile "/home/young/redis-5.0.5/log/log-26381.log"
 dir /home/young/redis-5.0.5/data/
-sentinel monitor mymaster 127.0.0.1 7000 2
+sentinel monitor mymaster 127.0.0.1 7000 2 #主机名 ip port 客观投票数
 sentinel down-after-milliseconds mymaster 30000
 sentinel parallel-syncs mymaster 1
 sentinel failover-timeout mymaster 180000
@@ -100,6 +100,14 @@ sentinel_scripts_queue_length:0
 sentinel_simulate_failure_flags:0
 master0:name=mymaster,status=ok,address=127.0.0.1:7000,slaves=2,sentinels=3
 ```
+
+总结:
+
+1. 启动sentinel：`redis-sentinel sentinel.conf`
+2. 查看sentinel：`redis-cli -h host -p port info sentinel`
+3. `sentinel monitor mymaster masterHost port count #主机名 host port 客观投票数`
+
+​       客观投票数：当有count个sentinel认为master宕机，则认为master真的宕机了
 
 ##### 客户端实现
 
