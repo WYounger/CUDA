@@ -116,3 +116,97 @@ InputStream inputStream = servletContext.getResourceAsStream("images/i-1.png");
 ##### 6.classpath
 
 在`maven`构建的项目中`resources`为`classpath`路径
+
+##### 7.静态资源的访问
+
+**web.xml**
+
+```xml
+<servlet>
+    <servlet-name>springmvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring/spring-*.xml</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>springmvc</servlet-name>
+    <url-pattern>/</url-pattern> <!--不能写成/*-->
+  </servlet-mapping>
+```
+
+**1.静态资源在webapp下**
+
+**资源目录结构**
+
+```bash
+webapp
+--images
+----test.jpg
+--WEB-INF
+----views
+------test.jsp
+```
+
+**spring-web.xml**
+
+```xml
+    <mvc:default-servlet-handler/>
+
+    <!-- 配置ViewResolver 使用内部资源视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/><!--从webapp开始-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+```
+
+**访问test.jpg**
+
+```jsp
+src = "<%=request.getContextPath()%>/images/test.jpg"
+```
+
+**2.静态资源在WEB-INF下**
+
+**资源目录结构**
+
+```bash
+webapp
+--WEB-INF
+----images
+------test.jpg
+----views
+------test.jsp
+```
+
+**spring-web.xml**
+
+```xml
+   <!--
+        mapping:url访问路径
+        /**:匹配url为/images/下所有访问路径
+        location:资源目录/实际路径
+        此种配置可以看作像访问请求方法一样
+    -->
+    <mvc:resources mapping="/images/**" location="/WEB-INF/images/"/>
+
+    <!-- 配置ViewResolver 使用内部资源视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/views/"/><!--从webapp开始-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+```
+
+**访问test.jpg**(同上一种方案)
+
+```jsp
+src = "<%=request.getContextPath()%>/images/test.jpg"
+```
+
+**总结**
+
+推荐将静态资源 **`图片` `js` `css`**放在**`webapp`**目录下 ,配置较少，同时官方也推荐
+
