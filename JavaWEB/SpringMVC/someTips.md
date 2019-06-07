@@ -6,13 +6,12 @@
 
 在springmvc中配置prefix、suffix
 
+```xml
 <bean class="InternalResoucesViewResolver">
-
-​	<property name="prefix" value="==/==**WEB-INF/views==/=="/**>
-
+​	<property name="prefix" value="/WEB-INF/views/"/**>
 ​	<property name="suffix" value=".jsp"/>
-
 </bean>
+```
 
 1. 自动添加
 
@@ -122,7 +121,7 @@ InputStream inputStream = servletContext.getResourceAsStream("images/i-1.png");
 **web.xml**
 
 ```xml
-<servlet>
+  <servlet>
     <servlet-name>springmvc</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
@@ -209,4 +208,3 @@ src = "<%=request.getContextPath()%>/images/test.jpg"
 **总结**
 
 推荐将静态资源 **`图片` `js` `css`**放在**`webapp`**目录下 ,配置较少，同时官方也推荐
-
