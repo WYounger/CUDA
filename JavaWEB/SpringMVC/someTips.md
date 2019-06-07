@@ -8,7 +8,7 @@
 
 ```xml
 <bean class="InternalResoucesViewResolver">
-​	<property name="prefix" value="/WEB-INF/views/"/**>
+​	<property name="prefix" value="/WEB-INF/views/">
 ​	<property name="suffix" value=".jsp"/>
 </bean>
 ```
