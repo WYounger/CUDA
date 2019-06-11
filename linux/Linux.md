@@ -324,9 +324,8 @@ tar -jxvf source.tar.bz2 [-C destination] #解压缩
 
 ##### 1.状态模式
 
-<div style="text-align: center; width: 500px; border: green solid 1px;">
-<img alt="" src="https://github.com/WYounger/computer-science/blob/master/images/vim.jpg" style="margin: 0 auto;" />
-</div>
+<div align="center"><img src="../images/vim.jpg"></div>
+
 
 ##### 2.一般命令模式
 
@@ -360,4 +359,17 @@ P  #粘贴到光标上一行
 :wq #写到并退出
 :w flieName #另存为fileName
 ```
+
+#### 10.基本bash
+
+##### 1.基本概念
+
+1. `shell`接收来自使用者的命令，以于内核进行沟通
+
+2. `/bin/bash `是Linux默认的shell
+3. `上下键`可以查看上一次和下次的命令
+4. `Tab` 自动补全命令和文件名
+5. 用`type`来查询命令是否为`bash shell`的内置命令
+
+##### 2.shell的变量功能
 
