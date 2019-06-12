@@ -24,7 +24,6 @@ class ReadJSON {
             int size = array.size();
             for (int i = 0; i < size; i++) {
                 JsonObject row = array.get(i).getAsJsonObject();
-//                String part = new String(row.get("part").getAsString().getBytes("gbk"),"gbk");
                 names.add(row.get("part").getAsString());
             }
         } catch (FileNotFoundException e) {
