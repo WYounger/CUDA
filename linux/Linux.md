@@ -365,16 +365,30 @@ P  #粘贴到光标上一行
 ##### 1.基本概念
 
 1. `shell`接收来自使用者的命令，以于内核进行沟通
-
 2. `/bin/bash `是Linux默认的shell
 3. `上下键`可以查看上一次和下次的命令
 4. `Tab` 自动补全命令和文件名
-5. 用`type`来查询命令是否为`bash shell`的内置命令
+5. `\`转义字符,eg:`\[enter]`命令行可以接着输入
+6. 用`type`来查询命令是否为`bash shell`的内置命令
 
 ##### 2.shell的变量功能
 
-1. **变量的设置**
+1. **变量**
 
    `varible=value` 	`=`两边没有`   `空格
 
-2. 
+   `$varible ${varible}`
+
+2. **单引号和双引号**
+
+   `双引号`内的特殊字符如$等，可以保有原本的特性
+
+   `单引号`内的特殊字符如$等，失去保有原本的特性，被当作纯文本
+
+   ```she
+   name=young
+   echo "${name} is my name" #输出 young is my name
+   echo '${name} is my name' #输出 ${name} is my name
+   ```
+
+##### 3.环境变量
