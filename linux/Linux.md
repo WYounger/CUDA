@@ -392,3 +392,115 @@ P  #粘贴到光标上一行
    ```
 
 ##### 3.环境变量
+
+`HOME` `PATH` 
+
+##### 4.read array declare
+
+1. **read**
+
+   ```bash
+   read [-pt] varible
+   #-p 后面可以接提示字符
+   #-t 后面可以等待的秒数
+   read -p "your name:" name
+   your name:young
+   echo ${name} #young
+   ```
+
+2. **declare**
+
+   ```bash
+   declare [-aixr] varible
+   #-a 将后面名为variable的变量定义为数组类型
+   #-i 将后面名为variable的变量定义为整数类型
+   #-x 用法与export一样，将后面的variable编程环境变量
+   #-r 将变量定义为只读类型
+   
+   young@young:~$ declare -a names
+   young@young:~$ names[0]=young
+   young@young:~$ names[1]=tom
+   young@young:~$ names[2]=jerry
+   young@young:~$ echo ${names[0]} ${names[1]} ${names[2]}
+   young tom jerry
+   
+   young@young:~$ declare num=1+1
+   young@young:~$ echo ${num}
+   1+1
+   young@young:~$ declare -i num=1+1
+   young@young:~$ echo ${num}
+   2
+   
+   young@young:~$ declare -r name=young
+   young@young:~$ name=ll
+   bash: name: 只读变量
+   young@young:~$ echo ${name}
+   young
+   ```
+
+##### 5.数据重定向
+
+1. **通配符**
+
+   `*`:0-n个字符
+
+   `?`:1-n个字符
+
+   `[]`:其中任意一个字符
+
+   `[-]`:按顺序的排列中的一个字符
+
+   `[^]`:不在其中的一个字符
+
+2. **数据重定向**
+
+   `1>`:以覆盖的方法将正确的数据输出到指定的文件和设备上
+
+   `1>>`:以累加的方法将正确的数据输出到指定的文件和设备上
+
+   `2>`:以覆盖的方法将错误的数据输出到指定的文件和设备上
+
+   `2>>`:以累加的方法将错误的数据输出到指定的文件和设备上
+
+​        `<`:重定向输入程序
+
+3. **多条命令执行**
+
+   `;`:cmd;cmd
+
+   `&&`:与，短路
+
+   `||`:或，短路
+
+4. **管道**
+
+   <div align="center"><img src="../images/pipe.jpg"></div>
+
+    ```bash
+   #cut 切出一行的部分片段
+   cut -d '分隔符' -f n #用分隔符分成几段，然后取第n段
+   cut -c m-n #取第下标在m-n之间的字符
+   
+   #grep 找出满足条件的所有行
+   frep [-acinv] '查找字符' file
+   #-a 将二进制文件以文本文件的方式查找数据
+   #-c 计算找到字符的总数
+   #-i 忽略大小写
+   #-n 输出该行在原文中的行号
+   
+   #sort
+   sort -t '分隔符' -k n #用分隔符分割后，按照第n列来排序
+   
+   #uniq
+   uniq [-ic]
+   #-i 忽略大小写
+   #-c 进行记数
+   
+   #wc
+   wc [-lwm]
+   #-l 行数
+   #-w 词数
+   #-m 字符数
+    ```
+
+   
