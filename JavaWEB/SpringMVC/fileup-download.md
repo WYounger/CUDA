@@ -42,7 +42,10 @@ fileUpLoad.jsp
     <!--注意 enctype="multipart/form-data"-->
 <form action="${pageContext.request.contextPath}/upLoadFile.do"
       method="post" enctype="multipart/form-data">
-    上传文件:<input type="file" name="upFile"></br>
+    单文件上传文件:<input type="file" name="upFile"></br>
+    <!--多文件上传
+        <input name="files" type="file" multiple="multiple">
+    -->
     上传:<input type="submit" value="上传">
 </form>
 </body>
@@ -75,7 +78,8 @@ public class FileUploadAndDownController {
 
     @RequestMapping(value="/upLoadFile.do")
     public void doFileUpload(MultipartFile upFile, HttpSession session){
-
+      //多文件接收 （List<MultipartFile> files,...）
+      //单文件接收
         //FileDirectory文件夹先要建好
         //C:\MyFile\JavaWebProject\SpringMVCAnnotation\target\SpringMVCAnnotation-1.0-SNAPSHOT\FileDirectory
         String path = session.getServletContext().getRealPath("/FileDirectory");
