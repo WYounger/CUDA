@@ -26,7 +26,7 @@ Field[] fields  =  clazz.getFields();
 ```java
 Constructor[] constructors = clazz.getConstructors();
 //通过构造函数的参数来获取确切的构造函数
-Contructor contructor = clazz.getContructor(new Class[]{Parameter.class...});
+Contructor contructor = clazz.getConstructor(new Class[]{Parameter.class...});
 ```
 
 ##### 2.获取构造函数参数
