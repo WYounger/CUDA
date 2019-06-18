@@ -43,7 +43,7 @@ Parameter[] parameters  = constructor.getParameters();
 Constructor constructor = MyObject.class.getConstructor(new Class[]{...});
 MyObject myObject = (MyObject)constructor.newInstance(parameters);
 //或者
-Constructor<MyObject> constructor = MyObejct.class.getConstructor(				  																													new Class[]{Parameter.class...});
+Constructor<MyObject> constructor = MyObejct.class.getConstructor(new Class[]{Parameter.class...});
 MyObject myObject = constructor.newInstance(parameters);
 ```
 
