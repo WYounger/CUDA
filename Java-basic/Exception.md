@@ -33,7 +33,7 @@
 
 由于divide()方法抛出了`checked excption`，所以调用者callDivide()要么捕获该异常要么继续抛出。上面是捕获抛出的异常的例子.当异常发生在divide()函数中,异常被抛出,那么(1)将不会被执行,异常会被catch块捕并执行(2),在catch块执行完成后,**接着会执行(3)**.当在divide()中没有抛出异常,那么catch块会被忽视.
 
-这里有一点要注意的是:**当一个异常被捕获后,他后的语句依然会被执行**
+这里有一点要注意的是:**当一个异常被捕获后,其后的语句依然会被执行**
 
 如果以上异常不想捕获,那么可以直接抛出
 
@@ -48,7 +48,7 @@
 
 ```java
 public void openFile(){
-        FileReader reader = null;
+        FileReader reader = null;//需要关闭的资源的对象一般都放在try{}外面定义
         try {
             reader = new FileReader("someFile");
             int i=0;
@@ -59,7 +59,7 @@ public void openFile(){
         } catch (IOException e) {
             //do something clever with the exception
         } finally {
-            if(reader != null){
+            if(reader != null){//关系资源对象之前需要检查是否为空
                 try {
                     reader.close();
                 } catch (IOException e) {
@@ -105,7 +105,7 @@ try(inputStream){
   }
 ```
 
-以上资源自动关闭的原理的在于:这些类都实现了AutoCloseable接口
+以上资源自动关闭的原理的在于:这些类都实现了`AutoCloseable`接口
 
 ```java
 public interface AutoCloseable{
@@ -116,12 +116,13 @@ public interface AutoCloseable{
 所以我们可以自定义一个类来让他具备在try(){}中有自动关闭的功能
 
 ```java
-class CloseMyResources implements AutoCloseable{
+class CloseMyResources implements AutoCloseable{//实现AutoCloseable接口
     public CloseMyResources(){
         System.out.println("创建我的的资源");
     }
     @Override
     public void close() throws Exception{
+        //关闭资源代码
         System.out.println("关闭我的资源");
     }
     public  void dosomething(){
@@ -143,29 +144,25 @@ do something!
 
 ```java
 try {
-
     // execute code that may throw 1 of the 3 exceptions below.
-
 } catch(SQLException e) {
     logger.log(e);
-
 } catch(IOException e) {
     logger.log(e);
-
 } catch(Exception e) {
     logger.severe(e);
 }
 //java7以后
 try {
     // execute code that may throw 1 of the 3 exceptions below.
-
 } catch(SQLException | IOException e) {//同时捕获多个异常
     logger.log(e);
-
 } catch(Exception e) {
     logger.severe(e);
 }
 ```
+
+当需要捕获多个异常，通常的策略是将具体的子类放在最前面，父类放在后面，这样可以使得抛出的异常可以被精确捕获。
 
 #### 6.异常继承体系
 
@@ -177,7 +174,7 @@ public class MyException extends Exception{
 }
 ```
 
-catch中
+`catch`中
 
 ```java
 try{
@@ -187,46 +184,32 @@ try{
 }
 ```
 
-IOException可以捕获到它的子类.所以要将子类放在多个catch块的前面,父类放在后面,让异常更加精确被捕获.
+`IOException`可以捕获到它的子类.所以要将子类放在多个catch块的前面,父类放在后面,让异常更加精确被捕获.
 
-throws中
+`throws`中
 
 ```java
 public void doSomething（） throws IOException{
 }
 ```
 
-在方法体内IOException的子类的都可以被抛出
+在方法体内`IOException`的子类的都可以被抛出
 
 ### 2.checked exception和unchecked exception
 
-checked exception和unchecked exception的区别在与
+`checked exceptio`n和`unchecked exception`的区别在与
 
-1. checked exceptions异常必须显示捕获或者声明抛出,而unchecked exception没有这种要求.
-2. checked exceptions继承自Exception ,而unchecked Exceptions继承自RuntimeException
+1. `checked exceptions`异常必须显示捕获或者声明并抛出,而`unchecked exception`没有这种要求.
+2. `checked exceptions`继承自`Exception` ,而`unchecked Exceptions`继承自`RuntimeException`
 
-自定义异常继承自checked exception
+自定义异常继承自`checked exception`
 
 ```java
  public class BadUrlException extends Exception {//BadUrlException为checked exception
         public BadUrlException(String s) {
-            super(s);
+            super(s);//给父类传递消息
         }
  }
-
-//catch处理
- public void storeDataFromUrl(String url){
-        try {
-            String data = readDataFromUrl(url);//调用
-        } catch (BadUrlException e) {
-            e.printStackTrace();
-        }
- }
-   //抛出
-   public void storeDataFromUrl(String url)
-    throws BadUrlException{
-        String data = readDataFromUrl(url);
-    }
 
     public String readDataFromUrl(String url)
     throws BadUrlException{//声明
@@ -239,6 +222,22 @@ checked exception和unchecked exception的区别在与
         //it as a String instance.
         return data;
     }
+
+  //catch处理checked exception
+ public void storeDataFromUrl(String url){
+        try {
+            String data = readDataFromUrl(url);//调用
+        } catch (BadUrlException e) {
+            e.printStackTrace();
+        }
+ }
+   //抛出checked exception
+   public void storeDataFromUrl(String url)
+    throws BadUrlException{ //声明
+        String data = readDataFromUrl(url);
+    }
+
+
 
 ```
 
@@ -363,7 +362,7 @@ interface InutStreamProcessor{
 }
 ```
 
-IO处理模板
+IO处理模板`模板设计模式`
 
 ```java
 public class InputStreamProcessingTemplate {

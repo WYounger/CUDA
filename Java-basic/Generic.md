@@ -48,19 +48,18 @@ class B{
     }
 }
 //测试
-/*输出
-GenericFactory<A> factoryA = new GenericFactory<>(A.class);
-        A a = factoryA.createInstance();
 
-        GenericFactory<B> factoryB = new GenericFactory<>(B.class);
-        B b = factoryB.createInstance();
-*/
+GenericFactory<A> factoryA = new GenericFactory<>(A.class);
+A a = factoryA.createInstance();
+
+GenericFactory<B> factoryB = new GenericFactory<>(B.class);
+B b = factoryB.createInstance();
 
 ```
 
 总结
 
-> 1.用Class<T>来申明一个泛型类，在类中可以使用Ｔ来限制参数和返回结果，不能创建Ｔ的实例对象
+> 1.用Class<T>来申明一个泛型类，在类中可以使用Ｔ来限制参数和返回结果，但不能创建Ｔ的实例对象
 >
 > 2.在创建泛型类的实例的时候，传入一个确定的类型作为参数
 
@@ -72,7 +71,7 @@ public static <T> T addAndReturn(T element, Collection<T> collection){
         return element;
     }
 //测试
-List<String> listStr = new ArrayList<>();
+			 List<String> listStr = new ArrayList<>();
         String resultStr = addAndReturn("abc",listStr);
         System.out.println(resultStr);
 
@@ -115,7 +114,7 @@ public class MyCollection<E> implements Iterable<E>{
   MyCollection<String> stringCollection = new MyCollection<String>();
 
     for(String string : stringCollection){
-      
+      //...
     }
 ```
 
@@ -129,7 +128,7 @@ class B extends A{}
 
 List<A> listA = new ArrayList<>();
 List<B> listB = new ArrayList<>();
-listA = listB;//error
+listA = listB;//error List<A>不是List<B>的父类
 ```
 
 ##### 无敌通配符<?>
@@ -152,7 +151,7 @@ public void processElements(List<? extends A> elements){
     //do some thing with o
   }
 }
-//参数可以为List<Type>,Type为A或者A的子类
+//参数为List<Type>,Type为A或者A的子类
 //需要注意的是只能从elements中取出元素，不能存进元素。因为不能确定List中传入的参数的是A的哪个子类
 ```
 

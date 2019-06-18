@@ -17,8 +17,8 @@ file.isDirectory();
 file.isFile();
 file.getName();//返回文件名(包括扩展名)
 long length = file.length();//字节数
-boolean success = file.renameTo(newFile);//改文件名
-File[] fs = file.listFiles();//返回文件夹下所有文件和文件夹,子文件和子文件夹不包括
+boolean success = file.renameTo(destFile);//改文件名
+File[] fs = file.listFiles();//返回文件夹下所有文件和文件夹,不包括子文件和子文件夹
 file.mkdir();//创建文件夹
 file.mkdirs();//file目录不存在则先创建父目录，然后创建子目录
 file.createNewFile();
@@ -36,15 +36,13 @@ int read();//读取一个字符，返回字符的ASCII值，故要进行强制�
 int read(char[] cbuf);//将读取的字符存入cbuf中,返回读取的字符的个数；结尾返回-1
 ```
 
-InputStreamReader
-
 #### 2.**将字节输入流转换为字符输入流**
 
 ```java
 Reader reader = new InputStreamReader(inputStream);
 ```
 
-#### 3.Writers
+#### 3.Writer
 
 字节输出流转换为字符输出流
 
@@ -74,7 +72,7 @@ int read();//返回数据的字节。中文不能使用char强转
 int read(byte[] b);//返回读取的字节数
 ```
 
-#### **2.outputStream**
+#### **2.outputStream **
 
 ```java
 void write(byte[] b);
@@ -89,12 +87,12 @@ void write(int b);
 图片复制实例
 
 ```java
-	InputStream in = new FileInputStream(new File("i-4.jpg"));
+			 InputStream in = new FileInputStream(new File("i-4.jpg"));
         OutputStream out = new  FileOutputStream("i-5.jpg");
-        byte[] b = new byte[100];
+        byte[] b = new byte[1024];
         int len = 0;
-        while((len=in.read(b)) != -1){
-            out.write(b,0,len);//读取多少，写入多少，以免字节丢失或多余
+        while((len=in.read(b)) != -1){//注意返回长度
+            out.write(b,0,len);//读取多少，写入多少，以免丢失数据
         }
         out.close();
         in.close();

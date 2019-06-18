@@ -92,7 +92,7 @@ try{
 
       	//遍历ResultSet
         while(result.next()) {//如果还有下一行，result.next()返回true
-          	//result<==>row
+          	//result指向一行row
           	//result.getXXX("columnName);获取当前行列名为colnmnName的值
             String name = result.getString("name");
             long   age  = result.getLong("age");
@@ -155,11 +155,11 @@ String sql = "update people set firstname=? , lastname=? where id=?";
 
 PreparedStatement preparedStatement =
         connection.prepareStatement(sql);
-//传递参数
+//设置查询参数
 preparedStatement.setString(1, "Gary");
 preparedStatement.setString(2, "Larson");
 preparedStatement.setLong  (3, 123);
-//执行更新，放回受影响的记录条数
+//执行更新，返回受影响的记录条数
 int rowsAffected = preparedStatement.executeUpdate();
 //重新给preparedStatement传递参数
 preparedStatement.setString(1, "Stan");
@@ -189,13 +189,13 @@ try{
     preparedStatement.setString(1, "Gary");
     preparedStatement.setString(2, "Larson");
     preparedStatement.setLong  (3, 123);
-
+		//添加到batch
     preparedStatement.addBatch();
 
     preparedStatement.setString(1, "Stan");
     preparedStatement.setString(2, "Lee");
     preparedStatement.setLong  (3, 456);
-		//添加
+		//添加到batch
     preparedStatement.addBatch();
 
   	//批量执行
@@ -217,7 +217,7 @@ try{
 1. 开启一个事务
 
    ```java
-   connection.setAutoCommit(false);
+   connection.setAutoCommit(false);//设置手动提交
    ```
 
 2. 回滚
@@ -242,9 +242,7 @@ connection.commit();
 Connection connection = ...
 try{
     connection.setAutoCommit(false);
-
-    // create and execute statements etc.
-
+    // create and execute statements etc...
     connection.commit();
 } catch(Exception e) {
     connection.rollback();//发生异常就回滚
