@@ -228,7 +228,7 @@ public class MyTest {
 }
 ```
 
-[有关RedisTemplate API 参考]()
+[有关RedisTemplate API 参考](<https://www.jianshu.com/p/7bf5dc61ca06>)
 
 **`StringRedisTemplate RedisTemplate`的区别**
 
