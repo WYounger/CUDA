@@ -180,7 +180,6 @@ int rowsAffected = preparedStatement.executeUpdate();
 ```java
 String sql = "update people set firstname=? , lastname=? where id=?";
 
-
 PreparedStatement preparedStatement = null;
 try{
     preparedStatement =
