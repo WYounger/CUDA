@@ -70,7 +70,7 @@ public class MyConfig{
   //默认情况下，bean的ID与带有@Bean注解的方法名是一样的
   //当然可以使用@Bean(name="customerID")来实现自定义
   public A a(){
-    //产生bean实例的逻辑
+    //产生Bean实例的逻辑
     return new A();
   }
 }
@@ -130,7 +130,7 @@ public class MyConfig1 {
 @Import(MyConfig1.class)
 public class MyConfig2 {
     @Bean
-    public Human human(Car car){//注入car
+    public Human human(Car car){//自动注入car
       	Human human = new Human();
         human.setCar(car);
         human.setName("hello");

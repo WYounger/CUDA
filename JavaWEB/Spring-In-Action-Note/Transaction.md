@@ -122,18 +122,16 @@ applicationContext.xml
 
 **事务回滚规则**
 
-1. RuntimeException回滚，CheckedExceptiont提交
+1. `RuntimeException`回滚，`CheckedException`提交
 
 **@Transactional注解**
 
 `propagation`：默认为`Propagation.REQUIRED`,当前有事务，则加入该事务，若没有事务，则创建一个新的事务
 
-`siolation`：默认为`Isolation.DEFAULT`,和连接的数据库的隔离级别一致
+`isolation`：默认为`Isolation.DEFAULT`,和连接的数据库的隔离级别一致
 
-1. 该注解一般用在方法上，且只能是public方法上
-2. 只有来自外部方法的调用才会被AOP代理捕获，类内部方法调用本类内部的其他方法斌不会引起事务，即使被调用的方法使用@Transaction修饰
-
-
+1. 该注解一般用在方法上，且只能是`public`方法上
+2. 只有来自`外部方法的调用`才会被`AOP代理`捕获，类内部方法调用本类内部的其他方法斌不会引起事务，即使被调用的方法使用`@Transaction`修饰
 
 参考资料
 

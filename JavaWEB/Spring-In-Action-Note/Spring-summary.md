@@ -35,7 +35,7 @@
 
 ##### 2.setter注入
 
-利用Java Bean中定义的setter方法来完成注入.首先容器会通过反射调用无参构造方法来创建对象,同时通过反射对应的serrer注入配置的值
+利用Java Bean中定义的setter方法来完成注入.首先容器会通过反射调用无参构造方法来创建对象,同时通过反射对应的setter注入配置的值
 
 ```xml
 <bean id="beanId" class="Bean">
@@ -169,7 +169,7 @@ public class MyTest {
         System.out.println(human);
     }
 }
-//第二种方法:需要引入junit和sring-test,使用ContextConfiguration加载应用上下文
+//第二种方法:需要引入junit和spring-test,使用ContextConfiguration加载应用上下文
 //采用自动注入方式获取Bean对象
 //注意一点locations要写classpath
 @RunWith(SpringJUnit4ClassRunner.class)

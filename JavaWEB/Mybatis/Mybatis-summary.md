@@ -71,10 +71,10 @@ public class SqlSessionFactoryUtils {
     }
   	public static SqlSessionFactory getSqlSessionFactory() {
     // 懒汉式+同步创建单例。双重锁
-    	if (sqlSessionFactory == null) {
+    	if (sqlSessionFactory == null) {//第一次判定
         //静态方法中开启同步，锁住Class对象
         synchronized (SqlSessionFactoryUtils.class) {
-            if (sqlSessionFactory == null){//只会进来一次
+            if (sqlSessionFactory == null){//第二次判定
                     String resource = "mybatis-config.xml";
                     InputStream inputStream=null;
                 try {
@@ -117,13 +117,13 @@ public class SqlSessionFactoryUtils {
 
 2. 使用注解**@Param**
 
-   Mapper接口中方法参数列表:@Param("name1") JavaType name1,
+   Mapper接口中方法参数列表:`@Param("name1") JavaType name1`,
 
-   ​							@Param("name2") JavaType name2 ,
+   ​							`@Param("name2") JavaType name2`,
 
    ​							...
 
-   xml-Sql中:不需要指定parameterType  #{name1},#{name2},...
+   xml-Sql中:不需要指定`parameterType`  #{name1},#{name2},...
 
 3. 使用Bean
 
@@ -191,7 +191,10 @@ public class SqlSessionFactoryUtils {
    </resultMap> 
    ```
 
+注意关联的Bean最好具有`无参构造函数`,谨防出现Bean创建问题
+
 #### 3.主键回填
+
 1.第一种方法
 
 ​	**useGeneratedkeys="true" keyProperty="id"**
@@ -205,6 +208,7 @@ keyProperty: 实体中代表主键的属性
 	select last_insert_id();
 </selectKey>
 </insert>
+
 #### 4.动态SQL
 
 [官方文档](http://www.mybatis.org/mybatis-3/zh/dynamic-sql.html)
@@ -234,10 +238,10 @@ keyProperty: 实体中代表主键的属性
 
 ```xml
 <where>
-	<if test="contion1">
+	<if test="condition1">
      	and ...
     </if>
-    <if test="conditionn">
+    <if test="condition2">
         or ...
     </if>
 </where>
@@ -250,7 +254,7 @@ keyProperty: 实体中代表主键的属性
 ```xml
 update student
 <set>
-	<if test="username != null">username=#{username},</if>
+	  <if test="username != null">username=#{username},</if>
     <if test="password != null">password=#{password},</if>
     <if test="email != null">email=#{email}</if>
 </set>
