@@ -7,7 +7,7 @@
 public class HelloController{
 
     @RequestMapping(value="/hello.do",method = RequestMethod.POST)
-    public String hello(@Validated Student student, BindingResult br, Model model) throws MyException {//控制器方法抛出异常
+    public String hello(@Valid Student student, BindingResult br, Model model) throws MyException {//控制器方法抛出异常
         if(br.hasErrors()){
             throw new MyException();
         }else{
@@ -20,11 +20,10 @@ public class HelloController{
     public String err(){
         return "err";
     }
-
 }
 ```
 
-异常处理方法和控制器方法一样，可以返回响应信息.
+异常处理方法和控制器方法一样，接收`请求参数`以及`Exception参数`,以及可以返回响应信息.
 
 如果定义了多个异常处理器方法，那么会使用最接近异常类的异常处理方法。例如一个控制器方法抛出IOExcepiton，如果有IOExcption和Excption的两个异常处理器方法，那么声明IOExption的异常处理器方法会收到异常消息，并处理异常.
 
@@ -40,7 +39,6 @@ public class GlobalExceptionHandler {
         return "err";
     }
 }
-
 ```
 
 全局异常处理器方法与控制器内异常处理器方法一样,在控制器内异常处理方法不能处理异常时会被调用.

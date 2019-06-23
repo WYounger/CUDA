@@ -1,18 +1,18 @@
 ##### Model
 
-总是将数据放到Model对象中，那么Model是什么呢？其实非常简单，他就是一个Map，保存key/value的集合。所以在Model数据类型的地方可以用Map代替掉。
+总是将数据放到Model对象中，那么Model是什么呢？其实非常简单，他就是一个Map，保存key-value的集合。所以在Model数据类型的地方可以用Map代替掉。
 
-既然数据放到model中，那么他是如何传递到页面中的呢？记得在学习Servlet时，将数据保存在HttpServletRequest中，然后通过转发到JSP(Servlet)，既然这样的话，也就很容易明白，其实model对象也是被放入到reuqest域中，然后通过view渲染，将数据填充到页面中。
+既然数据放到model中，那么他是如何传递到页面中的呢？记得在学习Servlet时，将数据保存在HttpServletRequest中，然后通过转发到JSP(实则是Servlet)，既然这样的话，也就很容易明白，model对象也是被放入到reuqest域中，然后通过view渲染，将数据填充到页面中。
 
 ##### 接受请求的输入
 
-1. 请求参数
+1. **请求参数**
 
    传递: url?param1=value1&param2=value2
 
    控制器方法接收:(Type param1,Type param2)
 
-2. 路径参数
+2. **路径参数**
 
    传递: webApplication/`pathVarible1`/`pathVarible2`
 
@@ -26,7 +26,7 @@
    }
    ```
 
-3. 表单post提交
+3. **表单post提交**
 
 ​          为了信息的安全性，表单提交一般使用post提交，数据会存放在请求报文体中传递到server。
 
@@ -52,7 +52,7 @@
 
    不要将URL直接拼接参数，会导致sql注入问题
 
-2. 使用flash属性
+2. 使用flash属性（**推荐**）
 
    ```java
    //存入
@@ -70,4 +70,4 @@
 
    RedirecAttributes接口是Model接口的子接口，添加了设置flash属性的方法。
 
-   在执行重定向前，所有的flash书属性都会复制到会话中。在重定向后，存在会话中的flash属性会被取出，并从会话总转移到模型之中。
+   在执行重定向前，所有的flash书属性都会复制到`session`中。在重定向后，存在会话中的flash属性会被取出，并从会话总转移到模型之中。

@@ -62,7 +62,7 @@ springmvc.xml
 
 #### 2）在maven下配置springmvc.xml
 
-> 在maven项目中,springmvc.xml放在resources目录下
+> 在maven项目中,springmvc.xml放在resources[classpath]目录下
 
 ![3](https://github.com/WYounger/computer-science/blob/master/images/1.png)
 
@@ -82,12 +82,13 @@ web.xml
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:springmvc.xml</param-value>
+      <param-value>classpath:springmvc.xml</param-value> <!--此处可以配置各个配置文件-->
     </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>springmvc</servlet-name>
-    <url-pattern>*.do</url-pattern>
+    <url-pattern>*.do</url-pattern><!--或者-->
+    <!--<url-pattern>/</url-pattern>-->
   </servlet-mapping>
 </web-app>
 ```

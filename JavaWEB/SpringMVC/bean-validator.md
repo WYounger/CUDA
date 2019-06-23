@@ -10,7 +10,7 @@ bean
 public class Student {
 
     @NotNull(message = "不能为空")
-    @Length(min = 2,max = 10,message = "长度2-15")
+    @Length(min = 2,max = 10,message = "长度2-10")
     private String name;
 
     @Min(value = 18,message = "年龄不能小于18")
@@ -23,7 +23,7 @@ public class Student {
     private String email;
 
     @NotNull(message = "不能为空")
-    @Pattern(regexp = "^1[358][1-9]{9}$",message="电话格式不正确")
+    @Pattern(regexp = "(^1[358])[1-9]{9}$",message="电话格式不正确")
     private String phone;
 
     @NotEmpty(message = "不能为空")
@@ -34,13 +34,15 @@ public class Student {
 
 控制器方法
 
+`@Valid Model modle` `BindingResult bindingResult`
+
 ```java
  @RequestMapping("/register.do")
     //验证model 绑定错误
     public String register(@Valid Student student, BindingResult br, Model model){
         if(br.hasErrors()){
             model.addAttribute("student",student);
-            //取出所有的错误属性
+            //取出所有验证失败的属性
             List<FieldError> list = br.getFieldErrors();
             for (FieldError error : list) {
                 model.addAttribute(error.getField()+"Err",//属性名+Err,生成错误消息
@@ -51,9 +53,10 @@ public class Student {
         }else{
             return "success";
         }
+    }
 ```
 
-jsp
+**jsp**
 
 ```jsp
  <form action="<%=path%>/validator/register.do" method="post">

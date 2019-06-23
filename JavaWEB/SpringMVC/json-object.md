@@ -97,7 +97,7 @@ public class JsonController {
     @ResponseBody
     public Object doJson(Student student){
 
-        Student student1 =new Student("hyx",9);
+        Student student1 =new Student("young",9);
         //返回单个对象
         //return student;
 
@@ -138,14 +138,14 @@ public class JsonController {
                        var temp = '';
                        
                        //data:接收单个对象
-                       // temp += data.name +' ' + data.age;
+                       //temp += data.name +' ' + data.age;
 
                        //data:接收list/array集合
                        // for(var i = 0;i<data.length;i++){
                        //     temp +=data[i].name + ' ' + data[i].age+'\n';
                        // }
                        
-                       //data:接收map
+                       //data:接收map map.key取值
                        temp += data.s.name + ' ' + data.s.age + '\n';
                        temp += data.s1.name + ' ' + data.s1.age;
                        alert(temp);
