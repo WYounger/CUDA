@@ -1,3 +1,5 @@
+##### 1.主键自增
+
 ```mysql
 create table student(
 `id` int auto_increment,

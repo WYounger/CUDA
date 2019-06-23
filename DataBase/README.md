@@ -1,0 +1,1 @@
+`sql.md`是浅读[sql基础教程](<http://www.ituring.com.cn/book/1880>)一书后做的笔记
