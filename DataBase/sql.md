@@ -245,7 +245,7 @@ SET <列名> = <表达式>[,<列名> = <表达式>,...]
 
 ##### 4.事务
 
-> ​	事务就是需要在同一个处理单元中执行的一系列更新处理的集合 
+> 事务就是需要在同一个处理单元中执行的一系列更新处理的集合 
 
 1. 原子性(Atomicity)
 
@@ -263,7 +263,9 @@ SET <列名> = <表达式>[,<列名> = <表达式>,...]
 
    > ​	持久性也可以称为耐久性，指的是在事务（不论是提交还是回滚）结束后， DBMS 能够保证该时间点的数据状态会被保存的特性。 
 
-五.复杂查询
+#### 五.复杂查询
+
+##### 1.视图
 
 ● 从SQL的角度来看，视图和表是相同的，两者的区别在于表中保存的是实际的数据，而视图中保存的是SELECT语句（视图本身并不存储数据）。
 ● 使用视图，可以轻松完成跨多表查询数据等复杂操作。
@@ -271,3 +273,129 @@ SET <列名> = <表达式>[,<列名> = <表达式>,...]
 ● 创建视图需要使用CREATE VIEW语句。
 ● 视图包含“不能使用ORDER BY”和“可对其进行有限制的更新”两项限制。
 ● 删除视图需要使用DROP VIEW语句。 
+
+<div><img src="images/table-view.jpg"></div>
+
+视图优点:
+
+   ● 视图无需保存数据，所以可以节省存储设备的容量
+
+   ● 可以将频繁使用的select语句保存成视图，然后用于其他sql操作中，可以简化操作
+
+```sql
+-- 创建视图
+CREATE VIEW 视图名称(<视图列名1>, <视图列名2>, ……)
+AS
+<SELECT语句>
+-- 视图基础
+-- 1. SELECT 语句中列的排列顺序和视图中列的排列顺序相同
+-- 2. 视图和表一样，可以书写在 SELECT 语句的 FROM 子句之中
+--    执行顺序:首先执行定义视图的select语句，然后根据得到的结果再执行from子句中使用视图的select语句
+-- 3. 可以在视图上再定义视图，但这样查询效率较低
+
+-- 视图的限制
+-- 1. 定义视图时不能使用ORDER BY 子句
+--    因为定义了即使使用了ORDER BY子句，也没有用，数据行是无序的
+-- 2. 通过对视图的使用delete,update,insert操作，有严格的限制
+
+-- 视图的删除
+DROP VIEW 视图名称[(<视图列名1>, <视图列名2>, ……)] [CASCADE]
+```
+
+##### 2.子查询
+
+1. 标量子查询
+
+   标量子查询就是返回单一值的子查询
+
+   > 能够使用常数或者列名的地方，无论是 SELECT 子句、 GROUP BY 子句、 HAVING 子句，还是ORDER BY 子句，几乎所有的地方都可以使用 。
+
+3.关联子查询
+
+```sql
+-- 定义
+-- 外部查询和内部查询(子查询)有条件关联关系
+
+-- eg:
+-- 查询出商品价格大于同类商品平均价的商品
+select `name`,`price`
+from `goods` as `g1`
+where `price` > (
+select avg(`price`)
+from `goods` as `g2`
+where `g1`.`type` = `g2`.`type`
+group by `type` -- 该行可以省略
+);
+```
+
+执行顺序:对`外层的每一行数据`，传递相关列的`值`到`内层`查询中作为已知`常数`，内层查询再使用该值进行相关操作得到对应的结果并将其返回，然后外层运用返回值来验证该行数据是否满足条件，从而进行相关操作。
+
+#### 六.谓词
+
+> 谓词就函数中的一种，是需要满足特定条件的函数，该条件就是返回值是真值 
+
+##### 1.like
+
+```sql
+-- %：0个以及以上个字符
+-- _: 任意一个字符
+where `column` like '...'
+```
+
+##### 2.between 
+
+```sql
+where `column` between min and max -- 等价于
+where `column` > min and `column` < max
+```
+
+##### 3.null
+
+```sql
+where `column` is null
+where `column` is not null
+```
+
+##### 4.in
+
+```sql
+where `column` in (value1,value2,...)
+where `column` not in (value1,value2,...)
+```
+
+##### 5.exist
+
+```sql
+-- 作为EXIST参数的子查询中经常会使用SELECT *
+
+SELECT product_name, sale_price
+FROM Product AS P -- 1
+WHERE EXISTS (SELECT *
+FROM ShopProduct AS SP -- 2
+WHERE SP.shop_id = '000C'
+AND SP.product_id = P.product_id);
+
+-- not exist
+```
+
+#### 七.集合运算
+
+以`行`为单位进行运算
+
+```sql
+-- 1. 作为运算对象的记录的列数必须相同
+-- 2. 作为运算对象的记录中列的类型必须一致
+-- 3. 可以使用任何select语句，但order by 子句只能在最后使用一次
+
+-- eg:
+SELECT product_id, product_name
+FROM Product
+UNION --(a+b) intersect(ab) except(a-ab)
+SELECT product_id, product_name
+FROM Product2
+order by product_id;
+```
+
+#### 八.连接查询
+
+以`列`为单位对表进行连接
