@@ -382,6 +382,8 @@ AND SP.product_id = P.product_id);
 
 以`行`为单位进行运算
 
+<div><img src="images/a+b.jpg"></div>
+
 ```sql
 -- 1. 作为运算对象的记录的列数必须相同
 -- 2. 作为运算对象的记录中列的类型必须一致
@@ -399,3 +401,28 @@ order by product_id;
 #### 八.连接查询
 
 以`列`为单位对表进行连接
+
+<div><img src="images/a-b.jpg"></div>
+
+```sql
+-- 内连接
+SELECT SP.shop_id, SP.shop_name, SP.product_id, P.product_name, 
+P.sale_price
+FROM ShopProduct AS SP INNER JOIN Product AS P -- 可以不取别名
+ON SP.product_id = P.product_id;
+
+-- 左外连接 左表为主表
+SELECT SP.shop_id, SP.shop_name, SP.product_id, P.product_name, 
+P.sale_price
+FROM ShopProduct AS SP LEFT OUTER JOIN Product AS P 
+ON SP.product_id = P.product_id;
+
+-- 右外连接 右表为主表
+SELECT SP.shop_id, SP.shop_name, SP.product_id, P.product_name,  
+P.sale_price
+FROM ShopProduct AS SP RIGHT OUTER JOIN Product AS P  
+ON SP.product_id = P.product_id;
+
+-- 同样可以用where子句来删选
+```
+
