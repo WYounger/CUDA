@@ -406,23 +406,27 @@ order by product_id;
 
 ```sql
 -- 内连接
+-- 含义:右表的每一行数据与左表的每一行做条件运算，拼接满足的条件的行，当扫描整个左表后没有一个成立，舍弃该 --      行
 SELECT SP.shop_id, SP.shop_name, SP.product_id, P.product_name, 
 P.sale_price
 FROM ShopProduct AS SP INNER JOIN Product AS P -- 可以不取别名
 ON SP.product_id = P.product_id;
 
--- 左外连接 左表为主表
+-- 左外连接
+-- 左表为主表，右边可以为空
+-- 含义:右表的每一行数据与左表的每一行做条件运算，拼接满足的条件的行，当扫描整个左表后没有一个成立，让右边
+--      该行与null拼接，右外连接相反。
 SELECT SP.shop_id, SP.shop_name, SP.product_id, P.product_name, 
 P.sale_price
 FROM ShopProduct AS SP LEFT OUTER JOIN Product AS P 
 ON SP.product_id = P.product_id;
 
--- 右外连接 右表为主表
+-- 右外连接 右表为主表，左边可以为空
 SELECT SP.shop_id, SP.shop_name, SP.product_id, P.product_name,  
 P.sale_price
 FROM ShopProduct AS SP RIGHT OUTER JOIN Product AS P  
 ON SP.product_id = P.product_id;
 
--- 同样可以用where子句来删选
+-- 同样可以用where，group by,having,order by对拼接后的表(假设看作)做相关运算
 ```
 
