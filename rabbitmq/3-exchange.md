@@ -12,7 +12,7 @@ auto delete ：当最后一个绑定到exchange上的队列删除后，自动删
 
 **direct exchange**
 
-所有发送到direct exchange的消息被转发到routekey中指定的queue
+所有发送到direct exchange的消息被转发到`routekey`中指定的`queue`
 
 注意:direct模式可以使用rabbitmq自带的exchange:defalult exchange，所以不需要将exchange进行任何绑定(binding)操作，消息传递时，routekey必须完全匹配才会被队列接收，否则该消息将会被抛弃
 
