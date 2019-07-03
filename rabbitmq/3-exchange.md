@@ -27,11 +27,11 @@ auto delete ：当最后一个绑定到exchange上的队列删除后，自动删
 
 **模糊匹配**
 
-”#“  匹配一个或多个词
+`#`  匹配0个或多个词
 
-"*"  匹配一个词
+`*`  匹配一个词
 
-”.“ 隔离一个词
+`.`  界定符,分割单词
 
 <div align="center"><img  src="images/topic-exchange.png"></div>
 
