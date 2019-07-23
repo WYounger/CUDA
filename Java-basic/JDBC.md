@@ -105,6 +105,24 @@ try{
 } finally {
     if(statement != null) statement.close();//注意关闭statement
 }
+
+				//sty-with-resource
+        try(Connection connection = ConnectionUtil.getConnection()) {
+
+            PreparedStatement ps = connection.prepareStatement("select * from `student` where id = ?");
+            ps.setInt(1,10000);
+            ResultSet rs = ps.executeQuery();
+            ResultSetMetaData md = rs.getMetaData();
+            while(rs.next()){
+                for(int i = 1; i <= md.getColumnCount(); i++){
+                    //resultSet获取值，index从1开始
+                    System.out.print(rs.getObject(i)+" ");
+                }
+                System.out.println();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 ```
 
 ##### 4、更新数据库
