@@ -129,7 +129,7 @@ git merge <name>#切换某分支到当前分支
 git branch -d <name>#删除当前分支
 ```
 
-##### 13.仓库管理
+##### 13.远程仓库管理
 
 ```bash
 git remote add origin git@github.com:userName/repository.git
@@ -137,6 +137,9 @@ git push -u origin master#首次本次仓库关联远程仓库
 
 git remote remove origin #删除联系
 git remote show orgin #查看联系
+
+#解决 master -> master (non-fast-forward) 问题
+ git pull origin master --allow-unrelated-histories
 ```
 
 ##### 14.修改本地仓库名称
