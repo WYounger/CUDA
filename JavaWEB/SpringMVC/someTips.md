@@ -88,7 +88,7 @@ InputStream inputStream = servletContext.getResourceAsStream("images/i-1.png");
 
 `/`**开头的前台路径以当前服务器的ip+端口的为参照路径**
 
-`/`**开头的后台路径以当前的项目名称ip+端口+project为参照路径**
+`/`**开头的后台路径以当前的项目ip+端口+project为参照路径**
 
 以**路径名称开头的相对路径**以**当前访问的路径**的**资源路径**的为参照路径
 
@@ -98,7 +98,7 @@ InputStream inputStream = servletContext.getResourceAsStream("images/i-1.png");
 
 在重定向到当前项目的另一个servlet：`response.sendRedirect(request.getContextpath()+”/servletName”)`
 
-**2、** web.xml中的URL使用来的表示路径的所以不存在以路径名称开头的相对路径，故只能用`/`开头，相对当前project
+**2、** web.xml中的URL是用来的表示路径的，所以不存在以路径名称开头的相对路径，故只能用`/`开头，相对当前project
 
 **3、** 在在项目发布后，`webapp`变成了项目名,其下的资源都在`webapp/..`下。所以在`webapp`的资源的绝对路径是`http://localhost:8080/projectName/...`
 
