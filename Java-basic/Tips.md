@@ -270,3 +270,15 @@ public static void write(List<? super Number> list){
 
 既可读又可写`<?>`
 
+##### 12.synchronized
+
+```java
+//锁定obj对象
+synchronized (obj){....}
+//锁定this
+public synchronized void method(){...}
+//锁定Class对象
+synchronized(MyClass){...}
+//锁定当前的Class对象
+public synchronized  static void method(){...}
+```
