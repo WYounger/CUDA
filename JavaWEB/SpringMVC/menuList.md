@@ -1,3 +1,5 @@
+##### 方法一  在List中递归查找父节点
+
 ```java
 package com.younger.springbootstart.controller;
 
@@ -9,8 +11,7 @@ import java.util.*;
 
 @RestController
 public class HelloController {
-
-
+  
     private MenuItem parent = null;
 
     @RequestMapping(value = "/menuList")
@@ -41,7 +42,7 @@ public class HelloController {
     }
 
     /**
-     * 查找结点的父节点
+     * 递归查找父节点时间复杂度有点高
      * @param dest
      * @param parentId
      * @return
@@ -63,7 +64,47 @@ public class HelloController {
         }
         return false;
     }
+}
+```
 
+##### 方法二  用Map保存父节点，提高查找速度
+
+```java
+		@RequestMapping(value = "/menuList")
+    public Object getMenuList() {
+        List<MenuItem> sources = this.getList();
+        List<MenuItem> dest = new ArrayList<>(3);
+
+        //运用空间换时间思想，用Map存储父节点，提高查找父节点的速度
+        Map<String, MenuItem> map = new HashMap<>(1);
+        while (sources.size() > 0) {
+            for (int index = 0; index < sources.size(); index++) {
+                MenuItem menuItem = sources.get(index);
+                if ("0".equalsIgnoreCase(menuItem.getParentId())) {
+                    dest.add(menuItem);
+                    sources.remove(menuItem);
+                    map.put(menuItem.getMenuId(), menuItem);
+                } else {
+                    parent = map.get(menuItem.getParentId());
+                    if (parent != null) {
+                        if (parent.getSubMenuList() == null) {
+                            parent.setSubMenuList(new ArrayList<>());
+                        }
+                        parent.getSubMenuList().add(menuItem);
+                        sources.remove(menuItem);
+                        map.put(menuItem.getMenuId(), menuItem);
+                    }
+                }
+            }
+        }
+        this.sortMenuItemList(dest);
+        return dest;
+    }
+```
+
+辅助代码
+
+```java
     /**
      * 获取菜单数据(模拟)
      * @return
@@ -100,7 +141,32 @@ public class HelloController {
         sources.add(menuItem14);
         return sources;
     }
-}
 
+		/**
+     * 对List<MenuList>进行排序
+     * @param sources
+     */
+    void sortMenuItemList(List<MenuItem> sources) {
+        if (sources != null && sources.size() > 1) {
+            Collections.sort(sources, new MeneItemComparator());
+            for (MenuItem menuItem : sources) {
+                if (menuItem.getSubMenuList() != null && menuItem.getSubMenuList().size() > 1) {
+                    this.sortMenuItemList(menuItem.getSubMenuList());
+                }
+            }
+        }
+    }
+
+		/**
+     * MenuItem比较器
+     */
+    static class MeneItemComparator implements Comparator<MenuItem> {
+        @Override
+        public int compare(MenuItem o1, MenuItem o2) {
+            return o1.getMenuId().compareTo(o2.getMenuId());
+        }
+    }
 ```
+
+
 
