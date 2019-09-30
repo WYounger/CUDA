@@ -1,3 +1,9 @@
+​		安装
+
+```sh
+npm install vue-router
+```
+
 src/router/index.js
 
 ```javascript
@@ -59,21 +65,14 @@ App.vue
     <li><router-link to="/hello">Hello</router-link></li>
     <router-view></router-view><!--显示组件类容-->
   </div>
+<!--
+router-link两种常用方法
+<router-link to="/path">home</router-link>
+<router-link :to="{name:'pathName'}">home</router-link> //绑定一个路由记录
+-->
 </template>
 
-<script>
-export default {
-  data(){
-    return {
-       name:'app.vue',
-    }
-  }
-}
-</script>
 
-<style>
-
-</style>
 ```
 
 Home.vue
