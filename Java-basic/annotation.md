@@ -94,14 +94,14 @@ public enum RetentionPolicy {
     /**
      * Annotations are to be discarded by the compiler.
      */
-    SOURCE, //源码时期
+    SOURCE, //源码阶段
 
     /**
      * Annotations are to be recorded in the class file by the compiler
      * but need not be retained by the VM at run time.  This is the default
      * behavior.
      */
-    CLASS, //编译时期
+    CLASS, //编译阶段
 
     /**
      * Annotations are to be recorded in the class file by the compiler and
@@ -109,7 +109,7 @@ public enum RetentionPolicy {
      *
      * @see java.lang.reflect.AnnotatedElement
      */
-    RUNTIME  //运行时期
+    RUNTIME  //运行阶段
 }
 ```
 
@@ -144,19 +144,17 @@ public class MyTest {
 class A{
     @Message("methodA-空函数")
     public void methodA(){
-
     }
 
     @Message(value="methodB-有内容的函数",num = 1)
     public void methodB(){
-        System.out.println("hello world!");
     }
 }
 ```
 
-举一个有适用的例子
+举一个实际一点的例子
 
-定义一个注解来实现忽略登录校验
+定义一个注解来实现controller method的否需要登陆校验
 
 ````java
 //自定义注解
@@ -173,10 +171,8 @@ public class WebLoginInterceptor implements HandlerInterceptor {
         // 获取注解
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Method method = handlerMethod.getMethod();
-        Class<?> clazz = method.getDeclaringClass();
-
-        IgnoreLogin ignoreLogin = clazz.getAnnotation(IgnoreLogin.class);
-        ignoreLogin = Objects.isNull(ignoreLogin) ? method.getAnnotation(IgnoreLogin.class) : ignoreLogin;
+        
+        IgnoreLogin ignoreLogin = method.getAnnotation(IgnoreLogin.class);
         if (!Objects.isNull(ignoreLogin)) {
             // 无需验证
             return true;

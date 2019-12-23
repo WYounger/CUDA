@@ -18,8 +18,8 @@
 
 ```java
  Class.forName("driverClassName");
- java6可以不用手动载入JDBC Driver;
-没有必要在每一次获取Connection之前载入driver，只需在第一次获取之前加载一次即可
+ //java6可以不用手动载入JDBC Driver;
+//没有必要在每一次获取Connection之前载入driver，只需在第一次获取之前加载一次即可
 ```
 
 1. 获取连接
@@ -69,7 +69,7 @@ Connection connection = DriverManager.getConnection(url, properties);
    //自动提交 每条更新语句执行完后立即提交，而无需等待事务结束commit
    //如果不处于自动提交模式，则必须通过调用Connection commit()方法显式提交每个数据库事务。
    connection.setAutoCommit(true);//connection默认状态
-   //后面transation细谈
+   //后面transaction细谈
    connection.setAutoCommit(false);
    ```
 
