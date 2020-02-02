@@ -11,16 +11,16 @@ command [-options] parameter1 parameter2
 ##### 2.基础命令的操作
 
 ```bash
-date [+%Y-%m-%d]#格式化输出
-cal  [month] [year] #日历
-bc   #简单计算器
+date [+%Y-%m-%d] # 格式化输出
+cal  [month] [year] # 日历
+bc   # 简单计算器
 ```
 
 3. ##### 热键
 
 `[Tab]` 命令补全、参数补全、文件名补全
 
-`[Ctrl]-c` 终止当前运行的程序
+`[Ctrl]-c` 终止当前不断运行的程序
 
 `[Ctrl]-d` 键盘输入结束，退出命令模式，退出root用户模式
 
@@ -29,6 +29,11 @@ bc   #简单计算器
 ```bash
 command --help
 man command
+# q: 退出该man程序
+# 空格键: 下一页
+# / 向下找
+# ？ 想上找
+info command
 ```
 
 #### 2.用户和用户组
@@ -50,7 +55,7 @@ man command
 ```bash
 -rwxr-xr-- 1 young young 3771 5月  25 17:19 .bashrc
 #文件类型
-# 用户/组/其他人的权限
+# 拥有者/用户组/其他人的权限
 #        链接次数
 #            用户名 组名 文件大小(byte)
 #                              创建时间或最后修改的时间
@@ -65,7 +70,7 @@ man command
 
 ​      `[l]`:链接文件
 
-​      `[b]`:存储设备
+​      `[b]`:存储设备，可按块随机读写
 
 ​      `[c]`:串行端口设备，例如键盘、鼠标
 
@@ -123,7 +128,7 @@ chmod o-x fileName #给其他人删除x权限
 
 ​        w:可写，编辑
 
-​        x:可执行 ，一个文件是否可以执行，不是看文件后缀名，而是是否具有`x`权限
+​        x:可执行 ，一个文件是否可以执行，不是看文件后缀名，而是是否具有`x`权限。而真正是否能执行取决于文件的数据
 
 2. 权限对目录的意义
 
@@ -152,7 +157,7 @@ chmod o-x fileName #给其他人删除x权限
 
 文件扩展名
 
-一个文件能不能被执行，与属性有关，而与文件名没有关系。
+一个文件能不能被执行，与属性有关，而与文件扩展名没有关系。
 
 #### 4.目录与路径
 
@@ -224,7 +229,7 @@ mv [-fiu] source destination
 mv [options] source1 source2 ... directory
 ```
 
-#### 5.文件内容查看
+#### 5.文件查找和内容查看
 
 ##### 1.cat
 
@@ -259,25 +264,11 @@ tail [-n number] file #-n number 显示后多少行
 tail [-n +number] file #只列出多少行后数据
 ```
 
-#### 6.文件查找
+#### 6.Linux文件系统
 
-##### 1.whereis
+![](images/centos7_目录树架构图.jpg)
 
-```bash
-
-```
-
-##### 2.locate
-
-```bash
-
-```
-
-##### 3.find
-
-```bash
-
-```
+此图版权属于[鸟哥官方网站](<http://cn.linux.vbird.org/>)
 
 #### 7.软件维护
 
