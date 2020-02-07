@@ -1,3 +1,5 @@
+##### 1.chrome快捷键
+
 | 快捷键           | 功能                   |
 | ---------------- | ---------------------- |
 | ctrl + t         | 打开并跳转到新页面     |
@@ -10,4 +12,37 @@
 | ctrl + h         | 打开历史记录页面       |
 | ctrl + j         | 打开下载类容页面       |
 | ctrl + shift + o | 打开书签管理器页面     |
+
+##### 2.google search 技巧
+
+1.完全匹配 `""`
+
+```bash
+"key"
+```
+
+2.排除 `-`
+
+```bash
+key -notKey #-没有空格
+```
+
+3.匹配 `*`
+
+```bash
+key*key
+```
+
+4.网址 `site`
+
+```bash
+key site:address #指定网址
+key -site:address #排除网址
+```
+
+5.文件类型 `typefile`
+
+```bash
+key typefile:pdf/ppt/docx/doc/mobi
+```
 
