@@ -1,5 +1,81 @@
 ##### 1.环境搭建
 
+```xml
+<dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        
+        <!-- mybatisPlus 核心库 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <!-- 引入阿里数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.6</version>
+        </dependency>
+
+    </dependencies>
+```
+
+```yaml
+#  应用端口
+server:
+  port: 8081
+
+spring:
+  # 数据源
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/HRMS?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+
+# mybatis-plus相关配置
+mybatis-plus:
+  # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
+  mapper-locations: classpath:mapper/*.xml
+ 
+  global-config:
+    db-config:
+      #主键类型  auto:"数据库ID自增" 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: auto
+      #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断"  NOT_EMPTY:"非空判断"
+      field-strategy: NOT_NULL
+      #数据库类型
+      db-type: MYSQL
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+```
+
 ```java
 //启动类
 @SpringBootApplication
@@ -44,7 +120,7 @@ public class SimpleTest{
 }
 ```
 
-##### 2.isnert、表名和字段名映射
+##### 2.insert
 
 ```java
 @Test
@@ -138,7 +214,7 @@ public void select(){
   
   //lambda条件构造器.
   //可以在编译期及时发现问题
-  LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+  LambdaQueryWrapper<User> lambdaQuery = Wrappers.lambdaQuery();
   //name like 'y%' and (age < 25 or email is not null)
   lambdaQuery.likeRight(User::getName,"y").and(lqw ->                           
                         lqw.lt(User::getAge,25).or().isNotNull(User::getEmail));
@@ -157,7 +233,7 @@ mybatis-plus:
 ```
 
 ```java
-//物理分页插件配置类
+//物理分页插件配置
 @Configuration
 public class MybatisPlusConfig{
   @Bean
@@ -170,13 +246,13 @@ public class MybatisPlusConfig{
 
 @Test
 public void page(){
-  LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+  LambdaQueryWrapper<User> lambdaQuery = Wrappers.lambdaQuery();
   lambdaQuery.ge(User::getAge,18);
   Page<User> page = new Page<>(1,2);//当前页，每页多少条
   IPage<User> iPage = userMapper.selectPage(page,lambdaQuery);
   iPage.getPages();//总页数
   iPgae.getTotal();//总条数
-  List<User> userList = iPage.getRecords(); //记录数据
+  List<User> userList = iPage.getRecords(); //结果数据
 }
 ```
 
@@ -203,7 +279,7 @@ updateWrapper.eq("name","young").eq("age",18).set("age",19);
 int rows = userMapper.update(null,updateWrapper);
 
 //LambdaUpdateWrapper
-LambdaUpdateWrapper<User> lambdaUpdate = Wrappers.<User>lambdaUpdate();
+LambdaUpdateWrapper<User> lambdaUpdate = Wrappers.lambdaUpdate();
 lambdaUpdate.eq(User::getName,"young").eq(User::getAge,18).set(User::getAge,19);
 int rows = userMapper.update(null,lambdaUpdate);
 ```
@@ -226,13 +302,15 @@ public void delete(){
   int rows = userMapper.deleteByMap(columnMap);
   
   //delete
-  LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambadQuery();
+  LambdaQueryWrapper<User> lambdaQuery = Wrappers.lambadQuery();
   lambdaQuery.eq(User::getName,"young").or().gt(User::getAge,20);
   int rows = userMapper.delete(lambdaQuery);
 }
 ```
 
+##### 7.参考
 
+[SpringBoot整合MyBatis-Plus3.1详细教程](<https://blog.csdn.net/weixin_34358092/article/details/91449447>)
 
 
 
