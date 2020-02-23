@@ -157,7 +157,7 @@ public class SqlSessionFactoryUtils {
 
 3. 一对一、一对多
 
-    **一对一**(association javaTypy)
+   **一对一**(association javaTypy)
 
    ```xml
    <resultMap  id="resultMap" tepy="Pojo">
@@ -254,9 +254,9 @@ keyProperty: 实体中代表主键的属性
 ```xml
 update student
 <set>
-	  <if test="username != null">username=#{username},</if>
-    <if test="password != null">password=#{password},</if>
-    <if test="email != null">email=#{email}</if>
+	  <if test="username != null and userName != ''">username=#{username},</if>
+    <if test="password != null and password != ''">password=#{password},</if>
+    <if test="email != null and email != ''">email=#{email}</if>
 </set>
 ```
 

@@ -272,3 +272,58 @@ AfterReturning:i have learned spring today!++++
 afterAdvice
 ```
 
+### 3.SpringBoot使用AOP
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+```
+
+```java
+@Service
+@Slf4j
+public class StuServiceImpl implements StuService {
+    @Override
+    public Student findStuById(Integer id) {
+        log.info("service");
+        return new Student(id,"test",10);
+    }
+}
+
+//自定义切点注解
+@Target({ElementType.METHOD})
+@Retention(RetentionPolicy.RUNTIME)
+public @interface LogAnnotation {
+}
+
+@Aspect
+@Component
+@Slf4j
+public class LogAop {
+
+  //使用execution定义切入点
+//    @Pointcut("execution(* com.younger.springboottest.service.impl.*.*(..))")
+  //使用注解定义切点
+    @Pointcut("@annotation(com.younger.springboottest.anotation.LogAnnotation)")
+    public void log(){}
+
+    @Before("log()")
+    public void testBefore(){
+        log.info(("test_bofore"));
+    }
+
+    @After("log()")
+    public void testAfter(JoinPoint joinPoint){
+        Signature signature = joinPoint.getSignature();
+        Class declaringType = signature.getDeclaringType();
+        String methodName = signature.getName();
+        log.info(methodName);
+        log.info(declaringType.toString());
+        log.info("after");
+    }
+}
+
+```
+

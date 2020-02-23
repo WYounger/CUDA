@@ -8,6 +8,9 @@
 
 ```java
 (@Param("param1") Type param1,..,@Param("paramn") Type paramn)
+
+//如果,当多个参数均为Object对象
+//可以使用parami.addr取值
 ```
 
 3.返回List<Type>
@@ -24,13 +27,13 @@
 <select id="selectStudents" resultType="com.younger.springbootstart.model.Student">
        select * from student
        <where>
-           <if test="name != null">
+         <!--对于字符串的判空,保险使用null和''判断-->
+           <if test="name != null and name != ''">
               name like concat("%",#{name},"%")
            </if>
-           <if test="age != null">
+           <if test="age != null and age != 0">
               and age = #{age}
            </if>
        </where>
     </select>
 ```
-
