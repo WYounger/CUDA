@@ -303,8 +303,9 @@ public @interface LogAnnotation {
 @Slf4j
 public class LogAop {
 
-  //使用execution定义切入点
+  //使用execution定义切点
 //    @Pointcut("execution(* com.younger.springboottest.service.impl.*.*(..))")
+   
   //使用注解定义切点
     @Pointcut("@annotation(com.younger.springboottest.anotation.LogAnnotation)")
     public void log(){}
@@ -318,12 +319,24 @@ public class LogAop {
     public void testAfter(JoinPoint joinPoint){
         Signature signature = joinPoint.getSignature();
         Class declaringType = signature.getDeclaringType();
+
         String methodName = signature.getName();
         log.info(methodName);
         log.info(declaringType.toString());
         log.info("after");
     }
-}
 
+    @Around("log()")
+    public Object testAround(ProceedingJoinPoint joinPoint) throws Throwable {
+        log.info("before");
+        //获取方法参数
+        Object[] args = joinPoint.getArgs();
+        //执行目标方法
+        Object proceed = joinPoint.proceed(args);
+        log.info("after");
+        //返回结果
+        return proceed;
+    }
+}
 ```
 
