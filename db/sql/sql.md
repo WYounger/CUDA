@@ -304,18 +304,15 @@ DROP VIEW 视图名称[(<视图列名1>, <视图列名2>, ……)] [CASCADE]
 
 ##### 2.子查询
 
-1. 标量子查询
+1.非关联子查询
 
-   标量子查询就是返回单一值的子查询
+子查询和父查询之间没有关联，父查询中表的字段没有出现在子查询中。执行顺序是先执行子查询得到结果集，然后父查询运用该结果
 
-   > 能够使用常数或者列名的地方，无论是 SELECT 子句、 GROUP BY 子句、 HAVING 子句，还是ORDER BY 子句，几乎所有的地方都可以使用 。
+2.关联子查询
 
-3.关联子查询
+外部查询和内部查询(子查询)有条件关联关系,
 
 ```sql
--- 定义
--- 外部查询和内部查询(子查询)有条件关联关系
-
 -- eg:
 -- 查询出商品价格大于同类商品平均价的商品
 select `name`,`price`
@@ -324,7 +321,7 @@ where `price` > (
 select avg(`price`)
 from `goods` as `g2`
 where `g1`.`type` = `g2`.`type`
-group by `type` -- 该行可以省略
+group by `type` -- 该行可以省略.因为内部g1.type此时为常量,从而g2.type=常量,也就进行了分组
 );
 ```
 
@@ -429,4 +426,37 @@ ON SP.product_id = P.product_id;
 
 -- 同样可以用where，group by,having,order by对拼接后的表(假设看作)做相关运算
 ```
+
+#### 九.SQL执行顺序
+
+```sql
+(7) SELECT /* 处理SELECT列表，产生 VT7 */
+(8) DISTINCT <select_list> /* 将重复的行从 VT7 中删除，产品 VT8 */
+(1) FROM <left_table>  /* 对FROM子句中的表执行笛卡尔积(交叉联接)，生成虚拟表 VT1。 */
+(3) <join_type> JOIN <right_table> /* 如果指定了OUTER JOIN(相对于CROSS JOIN或INNER JOIN)，
+保留表中未找到匹配的行将作为外部行添加到 VT2，生成 VT3。如果FROM子句包含两个以上的表，则对上一个联接生成的结果表和下一个表重复执行步骤1到步骤3，直到处理完所有的表位置。   */
+(2) ON <join_condition>/* 对 VT1 应用 ON 筛选器，只有那些使为真才被插入到 VT2。 */
+(4) WHERE <where_condition>/* 对 VT3 应用 WHERE 筛选器，只有使为true的行才插入VT4。 */
+(5) GROUP BY <group_by_list>   /* 按 GROUP BY子句中的列列表对 VT4 中的行进行分组，生成 VT5 */
+(6) HAVING <having_condition>  /* 对 VT5 应用 HAVING 筛选器，只有使为true的组插入到 VT6 */
+(9) ORDER BY <order_by_condition>  /* 将 VT8 中的行按 ORDER BY子句中的列列表顺序，生成一个游标(VC10)，
+生成表TV11，并返回给调用者。 */
+(10)LIMIT <limit_number>
+```
+
+````sql
+-- 大体步骤:
+from -> where -> group by -> having -> select -> order by -> limit
+
+-- 1. having 是对group by的分组结果再过滤,所以having只能在group by 存在时使用,通常接聚合函数作为条件
+-- 2. where 是对每一条记录过滤
+````
+
+参考
+
+#### 十.连接查询分类
+
+![](./images/sql-joins.png)
+
+[图片来源](https://www.cnblogs.com/liyongke/p/10528386.html)
 

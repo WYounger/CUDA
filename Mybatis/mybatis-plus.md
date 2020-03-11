@@ -219,6 +219,10 @@ public void select(){
   lambdaQuery.likeRight(User::getName,"y").and(lqw ->                           
                         lqw.lt(User::getAge,25).or().isNotNull(User::getEmail));
   userMapper.selectList(lambdaQuery);
+  
+  
+  //limit
+  lambdaQuery.like(User::getName,"test").last("limit 1"); //last("limit offset,length")
 }
 ```
 
