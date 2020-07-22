@@ -1,0 +1,29 @@
+SELECT
+	f.*,	
+	(
+	SELECT
+		GROUP_CONCAT( temp.mname ) 
+	FROM
+		( SELECT 
+		       concat( m.NAME, "#", m.id ) mname 
+			FROM family_member m 
+			WHERE m.family_id = f.id 
+			UNION all
+			SELECT 
+		       concat( m.NAME, "#", m.id ) mname 
+			FROM family_member m 
+			WHERE m.family_id = f.id 
+		) AS temp 
+	) AS mname 
+FROM
+	family AS f 
+WHERE
+	EXISTS (
+	SELECT
+		* 
+	FROM
+		family_member m 
+	WHERE
+		m.family_id = f.id 
+	AND m.NAME LIKE '%yang%' 
+	)
