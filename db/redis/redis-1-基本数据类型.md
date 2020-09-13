@@ -110,7 +110,7 @@ sunion key1 key2 #并集
 sdiff|sinter|sunion store destkey #将差集 交集 并集结果保存在destkey中
 ```
 
-##### dfd
+##### zset
 
 有序集合
 
