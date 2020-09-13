@@ -46,7 +46,7 @@ SpringAMQP声明: 对exchange.queue,binding使用注解形式定义
 @Bean
 public ConnectionFactory connectionFactory() {
   CachingConnectionFactory cachingConnectionFactory = new CachingConnectionFactory();
-  cachingConnectionFactory.setHost("47.114.162.77");
+  cachingConnectionFactory.setHost("127.0.0.1");
   cachingConnectionFactory.setPort(5672);
   cachingConnectionFactory.setUsername("guest");
   cachingConnectionFactory.setPassword("guest");
